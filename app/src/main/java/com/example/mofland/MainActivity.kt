@@ -8,6 +8,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -104,7 +105,6 @@ fun Menu(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-
                     .align(alignment = Alignment.Center)
             ) {
                 Image(
@@ -114,15 +114,40 @@ fun Menu(modifier: Modifier = Modifier) {
                         .fillMaxSize()
                         .align(alignment = Alignment.Center)
                 )
-                Column(
+                Row(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(115.dp, 50.dp)
+                       // .background(Color.Black)
                 ) {
-                    Row(
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .fillMaxHeight()
+
+                    ) {
+                        Column (
+                            modifier = Modifier
+                                .fillMaxHeight(0.4f)
+                        ){
+                            Row {
+                                Image(
+                                    painter = profile,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                )
+                                Column {
+                                    Text(text = "Géralt de Rives")
+                                    Text(text = "1m72")
+                                }
+                            }
+                        }
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth(1f)
+                            .fillMaxHeight()
+
                     ) {
                         Image(
                             painter = profile,
@@ -130,14 +155,15 @@ fun Menu(modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 .weight(1f)
                         )
-                        Icon(
-                            imageVector = Icons.Filled.Clear,
-                            contentDescription = "Close",
-                            modifier = Modifier
-                                .clickable { menu = false }
-                                .padding(8.dp)
-                        )
                     }
+                    //Icon(
+                    //    imageVector = Icons.Filled.Clear,
+                    //    contentDescription = "Close",
+                    //    modifier = Modifier
+                    //        .clickable { menu = false }
+                    //        .padding(8.dp)
+                    //)
+
                 }
             }
             Music.playSound(R.raw.whoosh)
