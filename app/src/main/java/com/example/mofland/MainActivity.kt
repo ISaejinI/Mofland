@@ -84,7 +84,8 @@ fun CadreComposant(modifier: Modifier = Modifier, nbrRessource: Int, imgRessourc
 
 
     Box(modifier = Modifier
-        .width(150.dp)) {
+        .width(150.dp)
+        .height(75.dp)) {
         Image(
             painter = cadre,
             contentDescription = null,
