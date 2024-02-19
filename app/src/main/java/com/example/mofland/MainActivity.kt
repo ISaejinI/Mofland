@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -68,18 +69,42 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     val gold = painterResource(R.drawable.bourse)
     val golds = 2000
 
+    val pickaxe = painterResource(R.drawable.pioche)
+    val upgrade = painterResource(R.drawable.upgrade)
+    val backpack = painterResource(R.drawable.backpack)
+    val book = painterResource(R.drawable.book)
+
+    val espacement = 16
+
     Row (modifier = Modifier,
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Top) {
-        CadreComposant(modifier = Modifier, nbrRessource = rocks, imgRessource = rock)
-        CadreComposant(modifier = Modifier, nbrRessource = woods, imgRessource = wood)
-        CadreComposant(modifier = Modifier, nbrRessource = wheats, imgRessource = wheat)
-        CadreComposant(modifier = Modifier, nbrRessource = golds, imgRessource = gold)
+        CadreComposantUp(modifier = Modifier, nbrRessource = rocks, imgRessource = rock)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantUp(modifier = Modifier, nbrRessource = woods, imgRessource = wood)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantUp(modifier = Modifier, nbrRessource = wheats, imgRessource = wheat)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantUp(modifier = Modifier, nbrRessource = golds, imgRessource = gold)
+        Spacer(modifier = Modifier.width(96.dp))
+        EngrenageIcon(modifier = Modifier)
+
+    }
+
+    Row (modifier = Modifier,
+        verticalAlignment = Alignment.Bottom) {
+        CadreComposantDown(modifier = Modifier, imgRessource = pickaxe)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantDown(modifier = Modifier, imgRessource = upgrade)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantDown(modifier = Modifier, imgRessource = backpack)
+        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantDown(modifier = Modifier, imgRessource = book)
+        Spacer(modifier = Modifier.width(espacement.dp))
     }
 }
 
 @Composable
-fun CadreComposant(modifier: Modifier = Modifier, nbrRessource: Int, imgRessource: Painter){
+fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessource: Painter){
     val cadre = painterResource(R.drawable.cadre)
 
 
@@ -106,5 +131,41 @@ fun CadreComposant(modifier: Modifier = Modifier, nbrRessource: Int, imgRessourc
             )
         }
 
+    }
+}
+
+@Composable
+fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter){
+    val cadre = painterResource(R.drawable.cadre)
+
+    Box(modifier = Modifier
+        .width(150.dp)
+        .height(75.dp)) {
+        Image(
+            painter = cadre,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Image(
+                painter = imgRessource,
+                contentDescription = null,
+                modifier = Modifier.size(50.dp, 50.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun EngrenageIcon(modifier: Modifier = Modifier){
+    Box(modifier = modifier) {
+        Image(
+            painter = painterResource(R.drawable.engrenage),
+            contentDescription = null,
+            modifier = Modifier.size(50.dp, 50.dp)
+        )
     }
 }
