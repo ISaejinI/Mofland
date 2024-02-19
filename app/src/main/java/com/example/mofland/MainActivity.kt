@@ -13,12 +13,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -39,8 +42,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mofland.ui.theme.MoflandTheme
 import fr.iutlens.mmi.demo.utils.Music
 import fr.iutlens.mmi.demo.utils.loadSound
@@ -116,7 +121,6 @@ fun Menu(modifier: Modifier = Modifier) {
                 )
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
                         .padding(115.dp, 50.dp)
                        // .background(Color.Black)
                 ) {
@@ -128,7 +132,7 @@ fun Menu(modifier: Modifier = Modifier) {
                     ) {
                         Column (
                             modifier = Modifier
-                                .fillMaxHeight(0.4f)
+                                .fillMaxHeight(0.3f)
                         ){
                             Row {
                                 Image(
@@ -136,33 +140,73 @@ fun Menu(modifier: Modifier = Modifier) {
                                     contentDescription = null,
                                     modifier = Modifier
                                 )
-                                Column {
-                                    Text(text = "Géralt de Rives")
-                                    Text(text = "1m72")
+                                Column(
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    modifier = Modifier.fillMaxSize()
+                                ) {
+                                    Text(modifier= Modifier.padding(8.dp), style= TextStyle(fontSize = 22.sp), text = "Géralt de Rives")
+                                    Text(modifier= Modifier.padding(8.dp), style= TextStyle(fontSize = 22.sp), text = "1m72")
                                 }
                             }
                         }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(1f)
-                            .fillMaxHeight()
+                        Column {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight(0.5f),
+                                horizontalArrangement = Arrangement.SpaceAround
+                            ) {
+                                Image(
+                                    painter = profile,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                                Image(
+                                    painter = profile,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceAround
+                            ) {
+                                Image(
+                                    painter = profile,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                                Image(
+                                    painter = profile,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
 
-                    ) {
-                        Image(
-                            painter = profile,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .weight(1f)
-                        )
+                        }
                     }
-                    //Icon(
-                    //    imageVector = Icons.Filled.Clear,
-                    //    contentDescription = "Close",
+                    //Column(
                     //    modifier = Modifier
-                    //        .clickable { menu = false }
-                    //        .padding(8.dp)
-                    //)
+                    //        .fillMaxWidth(1f)
+                    //        .fillMaxHeight()
+                    //) {
+                    //    Image(
+                    //        painter = profile,
+                    //        contentDescription = null,
+                    //        modifier = Modifier
+                    //            .weight(1f)
+                    //    )
+                    //}
+                    Icon(
+                        imageVector = Icons.Filled.Clear,
+                        contentDescription = "Close",
+                        modifier = Modifier
+                            .offset(x = 320.dp, y = -(30.dp))
+                            .clickable { menu = false }
+                            .padding(8.dp)
+                    )
 
                 }
             }
