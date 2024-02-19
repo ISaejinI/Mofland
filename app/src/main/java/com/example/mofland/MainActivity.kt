@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 //}
 
 @Composable
-fun ClickButton(modifier: Modifier = Modifier){
+fun ClickButton(){
     var counterbois by remember { mutableIntStateOf(0) }
     Column {
         Image(
