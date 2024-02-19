@@ -49,7 +49,7 @@ fun ClickButton(modifier: Modifier = Modifier){
     var counterbois by remember { mutableIntStateOf(0) }
     Column {
         Image(
-            painter = painterResource(R.drawable.forest),
+            painter = painterResource(R.drawable.bois),
             contentDescription = null,
             modifier=Modifier.clickable { counterbois += 1
             })
