@@ -85,7 +85,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         CadreComposantUp(modifier = Modifier, nbrRessource = wheats, imgRessource = wheat)
         Spacer(modifier = Modifier.width(espacement.dp))
         CadreComposantUp(modifier = Modifier, nbrRessource = golds, imgRessource = gold)
-        Spacer(modifier = Modifier.width(96.dp))
+        Spacer(modifier = Modifier.width(180.dp))
         EngrenageIcon(modifier = Modifier)
 
     }
@@ -109,7 +109,7 @@ fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessou
 
 
     Box(modifier = Modifier
-        .width(150.dp)
+        .width(125.dp)
         .height(75.dp)) {
         Image(
             painter = cadre,
@@ -139,7 +139,7 @@ fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter){
     val cadre = painterResource(R.drawable.cadre)
 
     Box(modifier = Modifier
-        .width(150.dp)
+        .width(100.dp)
         .height(75.dp)) {
         Image(
             painter = cadre,
