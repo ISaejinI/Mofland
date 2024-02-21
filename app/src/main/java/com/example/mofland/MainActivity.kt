@@ -101,6 +101,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         CadreComposantDown(modifier = Modifier, imgRessource = book)
         Spacer(modifier = Modifier.width(espacement.dp))
     }
+
+    Row (modifier = Modifier,
+        verticalAlignment = Alignment.CenterVertically) {
+        ComposantUpgrade(modifier = Modifier, imgRessourceItem = pickaxe,nbrRessource = rocks, imgRessource = rock)
+    }
 }
 
 @Composable
@@ -167,5 +172,33 @@ fun EngrenageIcon(modifier: Modifier = Modifier){
             contentDescription = null,
             modifier = Modifier.size(50.dp, 50.dp)
         )
+    }
+}
+
+@Composable
+fun ComposantUpgrade(modifier: Modifier = Modifier, imgRessourceItem: Painter,nbrRessource: Int, imgRessource: Painter){
+
+    Box(modifier = modifier){
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(text = "Améliorer votre")
+            Image(
+                painter = imgRessourceItem,
+                contentDescription = null,
+                modifier = Modifier.size(50.dp, 50.dp)
+            )
+            Text(text = " en utilisant $nbrRessource")
+            Image(
+                painter = imgRessource,
+                contentDescription = null,
+                modifier = Modifier.size(50.dp, 50.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun Upgrade(modifier: Modifier = Modifier){
+    Column {
+
     }
 }
