@@ -9,14 +9,16 @@ class Resources(val name : String = "No Name",
                 val tool : Int = R.drawable.ic_launcher_background,
                 _cost : Int = 0
 ) {
-    fun click() {
-        nb+=mlt
-    }
-
     var nb by mutableIntStateOf(0)
     var mlt by mutableIntStateOf(1)
     var upMlt by mutableIntStateOf(1)
     var cost by mutableIntStateOf(_cost)
+
+    var upgrade : ((Unit) -> Unit)? = null
+
+    fun click() {
+        nb+=mlt
+    }
 }
 
 /*

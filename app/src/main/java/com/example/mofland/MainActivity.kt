@@ -51,6 +51,10 @@ val rock = Resources(name = "rock",  res = R.drawable.ic_launcher_background, to
 val wheat = Resources(name = "wheat",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10)
 val gold = Resources(name = "gold",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 30)
 
+fun upgradeTest(resource : Resources){
+
+}
+
 @Composable
 fun ClickButton(modifier: Modifier = Modifier, resource : Resources){
     Column {
@@ -59,12 +63,17 @@ fun ClickButton(modifier: Modifier = Modifier, resource : Resources){
             contentDescription = null,
             modifier=Modifier.clickable { resource.click()})
         Text(text = "Clicks pour ${resource.name} : ${resource.nb}")
-
+        Button(onClick = { /*TODO*/ }) {
+        }
     }
 }
 
 @Composable
 fun Render(modifier: Modifier = Modifier){
+    wood.upgrade ={
+        wood.mlt++
+        gold.nb -= 100
+    }
     Row {
         ClickButton(Modifier, wood)
         ClickButton(Modifier, rock)
