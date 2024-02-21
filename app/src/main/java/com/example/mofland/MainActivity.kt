@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mofland.ui.theme.MoflandTheme
+import com.example.mofland.Resources
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                        ClickButton()
+                    Render()
                 }
             }
         }
@@ -44,17 +46,30 @@ class MainActivity : ComponentActivity() {
 
 //}
 
+val wood = Resources(name = "wood",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10)
+val rock = Resources(name = "rock",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 10)
+val wheat = Resources(name = "wheat",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10)
+val gold = Resources(name = "gold",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 30)
+
 @Composable
-fun ClickButton(modifier: Modifier = Modifier){
-    var counterbois by remember { mutableIntStateOf(0) }
+fun ClickButton(modifier: Modifier = Modifier, resource : Resources){
     Column {
         Image(
-            painter = painterResource(R.drawable.forest),
+            painter = painterResource(resource.tool),
             contentDescription = null,
-            modifier=Modifier.clickable { counterbois += 1
-            })
-        Text(text = "Clicks : $counterbois")
+            modifier=Modifier.clickable { resource.click()})
+        Text(text = "Clicks pour ${resource.name} : ${resource.nb}")
 
+    }
+}
+
+@Composable
+fun Render(modifier: Modifier = Modifier){
+    Row {
+        ClickButton(Modifier, wood)
+        ClickButton(Modifier, rock)
+        ClickButton(Modifier, wheat)
+        ClickButton(Modifier, gold)
     }
 }
 
