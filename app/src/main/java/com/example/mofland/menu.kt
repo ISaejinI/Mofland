@@ -48,29 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.ui.theme.MoflandTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-        super.onCreate(savedInstanceState)
-        setContent {
-            MoflandTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Menu()
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun Menu(modifier: Modifier = Modifier) {
+fun Menu(modifier: Modifier = Modifier, onClose: () -> Unit) {
     val background = painterResource(R.drawable.menu)
     val profile = painterResource(R.drawable.profile)
     val gradient = Brush.linearGradient(
@@ -78,16 +57,7 @@ fun Menu(modifier: Modifier = Modifier) {
         500.0f to Color.Cyan,
         start = Offset.Zero,
         end = Offset.Infinite)
-    var menu by remember{ mutableStateOf(false) }
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(gradient))
-    {
-        Button(onClick = { menu = true}) {
-            Text(text = "Menu")
-        }
-    }
+    var menu by remember{ mutableStateOf(true) }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -201,22 +171,22 @@ fun Menu(modifier: Modifier = Modifier) {
                         contentDescription = "Close",
                         modifier = Modifier
                             .offset(x = 320.dp, y = -(30.dp))
-                            .clickable { menu = false }
+                            .clickable { menu = false
+                            onClose()}
                             .padding(8.dp)
                     )
 
                 }
             }
-            Music.playSound(R.raw.whoosh)
         }
     }
 
 }
 
-@Preview(showBackground = true, showSystemUi = true, device = "spec:width=411dp,height=891dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape")
-@Composable
-fun GreetingPreview() {
-    MoflandTheme {
-        Menu()
-    }
-}
+//@Preview(showBackground = true, showSystemUi = true, device = "spec:width=411dp,height=891dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape")
+//@Composable
+//fun MenuPreview() {
+//    MoflandTheme {
+//        Menu()
+//    }
+//}

@@ -18,11 +18,13 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mofland.ui.theme.MoflandTheme
 import com.example.mofland.Resources
+import kotlin.math.ceil
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +48,10 @@ class MainActivity : ComponentActivity() {
 
 //}
 
-val wood = Resources(name = "wood",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10)
-val rock = Resources(name = "rock",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 10)
-val wheat = Resources(name = "wheat",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10)
-val gold = Resources(name = "gold",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 30)
+val wood = Resources(name = "wood",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
+val rock = Resources(name = "rock",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
+val wheat = Resources(name = "wheat",  res = R.drawable.ic_launcher_foreground, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
+val gold = Resources(name = "gold",  res = R.drawable.ic_launcher_background, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
 
 fun upgradeTest(resource : Resources){
 
@@ -63,7 +65,14 @@ fun ClickButton(modifier: Modifier = Modifier, resource : Resources){
             contentDescription = null,
             modifier=Modifier.clickable { resource.click()})
         Text(text = "Clicks pour ${resource.name} : ${resource.nb}")
-        Button(onClick = { /*TODO*/ }) {
+        Text(text = "Bonus : ${resource.mlt}")
+        Text(text = "Cout ${resource.name} : ${resource.cost}")
+        Text(text = "Cout gold : ${ceil(resource.cost/2.0).toInt()}")
+        Button(
+            onClick = { upgradeClick(resource) },
+            enabled = checkUpgrade(resource)
+        ) {
+            Text(text = "${resource.lvl} -> ${resource.lvl+1}")
         }
     }
 }
@@ -74,6 +83,17 @@ fun Render(modifier: Modifier = Modifier){
         wood.mlt++
         gold.nb -= 100
     }
+    var menu by remember{ mutableStateOf(true) }
+    Row(
+        verticalAlignment = Alignment.Bottom,
+        modifier = Modifier
+            .fillMaxSize())
+    {
+        Button(onClick = { menu = !menu}) {
+            Text(text = "Menu")
+        }
+    }
+    Menu(onClose = {menu = false })
     Row {
         ClickButton(Modifier, wood)
         ClickButton(Modifier, rock)
