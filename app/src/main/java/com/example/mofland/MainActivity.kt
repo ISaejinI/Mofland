@@ -61,14 +61,20 @@ fun DraggableTextLowLevel() {
 
         Box(
             Modifier
-                .graphicsLayer(scaleX = scale, scaleY = scale, translationX = offsetX, translationY = offsetY)
+                .graphicsLayer(
+                    scaleX = scale,
+                    scaleY = scale,
+                    translationX = offsetX,
+                    translationY = offsetY
+                )
                 .pointerInput(Unit) {
                     detectTransformGestures { centroid, pan, zoom, rotation ->
-                        offsetX = (offsetX + pan.x*scale).coerceAtMost(0f)
-                        offsetY += pan.y*scale
-                        scale = (zoom*scale).coerceIn(3f .. 4f)
+                        offsetX = (offsetX + pan.x * scale).coerceAtMost(0f)
+                        offsetY += pan.y * scale
+                        scale = (zoom * scale).coerceIn(3f..4f)
                     }
-                }.fillMaxSize(),
+                }
+                .fillMaxSize(),
             content = {
                 Image(
                     painter = painterResource(R.drawable.map),
@@ -90,16 +96,5 @@ fun DraggableTextLowLevel() {
     }
 }
 
-@Composable
-fun Render(modifier: Modifier = Modifier){
-
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MoflandTheme {
-
-    }
-}
+//@Composable
+//fun sprite(modifier: Modifier
