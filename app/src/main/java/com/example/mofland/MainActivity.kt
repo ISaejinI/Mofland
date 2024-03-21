@@ -3,6 +3,7 @@ package com.example.mofland
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,13 +28,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.mofland.ui.theme.MoflandTheme
+import com.example.mofland.utils.loadSpritesheet
 import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
@@ -52,8 +60,25 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+val spritePositions = listOf(
+    Offset(100f, 200f),
+    Offset(300f, 400f),
+    Offset(500f, 600f)
+    // Ajoutez d'autres positions si nécessaire
+)
+
 @Composable
 fun DraggableTextLowLevel() {
+    val wood = Resources(name = "wood",  res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
+    val rock = Resources(name = "rock",  res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
+    val wheat = Resources(name = "wheat",  res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
+    val gold = Resources(name = "gold",  res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
+    val listRes = listOf(wood, rock, wheat, gold)
+    LocalContext.current.loadSpritesheet(R.drawable.map, 2, 2)
+    listRes.forEach{
+        LocalContext.current.loadSpritesheet(it.res, 1, 1)
+    }
+    val game by remember { mutableStateOf(makeGame(listRes))}
     Box(modifier = Modifier.fillMaxSize()) {
         var offsetX by remember { mutableStateOf(0f) }
         var offsetY by remember { mutableStateOf(0f) }
@@ -69,25 +94,19 @@ fun DraggableTextLowLevel() {
                 )
                 .pointerInput(Unit) {
                     detectTransformGestures { centroid, pan, zoom, rotation ->
-                        offsetX = (offsetX + pan.x * scale).coerceAtMost(0f)
+                        offsetX = (offsetX + pan.x * scale)
+                        //offsetX = (offsetX + pan.x * scale).coerceAtMost(0f)
                         offsetY += pan.y * scale
+                        //offsetX = (offsetX + pan.x * scale).coerceAtMost(0f)
+                        //offsetY += pan.y * scale
                         scale = (zoom * scale).coerceIn(3f..4f)
                     }
                 }
                 .fillMaxSize(),
             content = {
-                Image(
-                    painter = painterResource(R.drawable.map),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
-                )
-                //Row {
-                //    Image(
-                //        painter = painterResource(R.drawable.profile),
-                //        contentDescription = null,
-                //        modifier = Modifier.fillMaxSize()
-                //    )
-                //}
+                game.View(modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black))
             }
         )
         Row {
