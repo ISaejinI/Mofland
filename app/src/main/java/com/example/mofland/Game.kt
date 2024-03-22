@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.core.util.toRange
 import com.example.mofland.game.Game
 import com.example.mofland.ui.theme.MoflandTheme
 import com.example.mofland.game.sprite.BasicSprite
@@ -28,20 +30,24 @@ fun makeGame(listRes : List<Resources>): Game {
     val tileMap = R.drawable.map.tiledArea(map)
     // val sprite = BasicSprite(R.drawable.car,3.5f*tileMap.w,2.5f*tileMap.h)
     val list = mutableSpriteListOf() // Notre liste de sprites
+    val min = 115
     listRes.forEach{
         val res = it.res
         repeat(7){ // On crée plusieurs sprites aléatoires
+            val maxX = (tileMap.sizeX * tileMap.w) - min
+            val maxY = (tileMap.sizeY * tileMap.h) - min
+
+            val randomX = (min..maxX).random()
+            val randomY = (min..maxY).random()
             list.add(
                 BasicSprite(
                     res,
-                    (tileMap.sizeX*Math.random()*tileMap.w).toFloat(),
-                    (tileMap.sizeY*Math.random()*tileMap.h).toFloat(),
+                    randomX.toFloat(),
+                    randomY.toFloat(),
                     0)
             )
         }
     }
-
-    System.out.println(list)
 
 
     val game = Game(background = tileMap,
@@ -50,12 +56,17 @@ fun makeGame(listRes : List<Resources>): Game {
     ){ (x,y)->
         val target  =  list[x,y]
         if (target != null) {
+            val maxX = (tileMap.sizeX * tileMap.w) - min
+            val maxY = (tileMap.sizeY * tileMap.h) - min
+
+            val randomX = (min..maxX).random()
+            val randomY = (min..maxY).random()
             list.remove(target)
             list.add(
                 BasicSprite(
                     R.drawable.logressource,
-                    (tileMap.sizeX*Math.random()*tileMap.w).toFloat(),
-                    (tileMap.sizeY*Math.random()*tileMap.h).toFloat(),
+                    randomX.toFloat(),
+                    randomY.toFloat(),
                     0)
             )
         }
