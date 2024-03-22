@@ -16,10 +16,16 @@ val provider = GoogleFont.Provider(
     certificates =  R.array.com_google_android_gms_fonts_certs
 )
 
-val fontName = GoogleFont("VT323")
+val fontName1 = GoogleFont("VT323")
 
 val fontVT323Family = FontFamily(
-    Font(googleFont = fontName, fontProvider = provider)
+    Font(googleFont = fontName1, fontProvider = provider)
+)
+
+val fontName2 = GoogleFont("PressStart2P")
+
+val fontPressStart2PFamily = FontFamily(
+    Font(googleFont = fontName2, fontProvider = provider)
 )
 
 // Set of Material typography styles to start with
@@ -30,15 +36,14 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
+    ),
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = fontPressStart2PFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
-    ),
+    )/*,
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
