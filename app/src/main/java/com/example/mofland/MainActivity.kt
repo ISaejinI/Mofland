@@ -88,23 +88,26 @@ fun Render(modifier: Modifier = Modifier){
         wood.mlt++
         gold.nb -= 100
     }
-    var menu by remember{ mutableStateOf(true) }
+    var menu by remember{ mutableStateOf(false) }
     Row(
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier
             .fillMaxSize())
     {
-        Button(onClick = { menu = !menu}) {
+        Button(onClick = { menu = true}) {
             Text(text = "Menu")
         }
     }
-    Menu(onClose = {menu = false })
     Row {
         ClickButton(Modifier, wood)
         ClickButton(Modifier, rock)
         ClickButton(Modifier, wheat)
         ClickButton(Modifier, gold)
     }
+    if (menu) {
+        BlockerSurface()
+    }
+    Menu(visible = menu, onDismiss = {menu = false })
 }
 
 
