@@ -261,7 +261,7 @@ fun QuarterScreenRectangle() {
             modifier = Modifier
                 .size(50.dp)
                 .align(Alignment.TopEnd)
-                .padding(end = 8.dp, top = 8.dp)
+                .padding(end = 4.dp, top = 4.dp)
         )
     }
 }
