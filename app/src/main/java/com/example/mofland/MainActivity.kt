@@ -66,18 +66,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-enum class Screen {
-    HOME, GAME
-}
+enum class Screen { Home, Game, Credits }
 
 @Composable
 fun Game() {
-    var currentScreen by remember { mutableStateOf(Screen.HOME) }
+    var currentScreen by remember { mutableStateOf(Screen.Home) }
 
     Surface {
         when (currentScreen) {
-            Screen.HOME -> Home(onPlayClick = { currentScreen = Screen.GAME })
-            Screen.GAME -> Map()
+            Screen.Home -> Home(onNavigate = { screen -> currentScreen = screen })
+            Screen.Game -> Map()
+            Screen.Credits -> Credits(onNavigate = { screen -> currentScreen = screen })
         }
     }
 }

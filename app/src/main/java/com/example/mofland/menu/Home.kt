@@ -27,9 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
+import com.example.mofland.Screen
 
 @Composable
-fun Home(modifier: Modifier = Modifier) {
+fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
     val espacement = 200
     val backgroundColor = Color(0xFFE3B13A)
     var menu by remember {
@@ -54,7 +55,7 @@ fun Home(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Bottom
             ) {
-                CadreComposantGauche(modifier = Modifier, Txt = "Continuer")
+                CadreComposantGauche(modifier = Modifier, Txt = "Continuer", onNavigate = onNavigate)
                 Spacer(modifier = Modifier.width(espacement.dp))
                 CadreComposantDroit(modifier = Modifier, Txt = "Quitter")
             }
@@ -71,13 +72,26 @@ fun Home(modifier: Modifier = Modifier) {
                     modifier = Modifier.clickable { menu = true }
                 )
             }
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.BottomStart),
+                contentAlignment = Alignment.BottomStart)
+            {
+                Text(
+                    text = "Crédits",
+                    color = Color.White,
+                    fontSize = 32.sp,
+                    modifier = Modifier.clickable { onNavigate(Screen.Credits) }
+                )
+            }
         }
         Params(visible = menu, onDismiss = {menu = false})
     }
 }
 
 @Composable
-fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String){
+fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String, onNavigate: (Screen) -> Unit){
     val cadre = painterResource(R.drawable.scrollinterfacelarge)
     val activity = (LocalContext.current as? Activity)
 
@@ -88,7 +102,7 @@ fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String){
             painter = cadre,
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
-                .clickable {  }
+                .clickable { onNavigate(Screen.Game) }
         )
         Box(
             contentAlignment = Alignment.Center,

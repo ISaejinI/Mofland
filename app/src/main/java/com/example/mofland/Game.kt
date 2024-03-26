@@ -51,17 +51,17 @@ fun makeGame(listRes : List<Resources>): Game {
             )
         }
     }
-    list.add(
-        MofleSprite(
-            listRes[0].elt,
-            10.00.toFloat(),
-            0.00.toFloat(),
-            0
-        ){
-            y += 5
-            if (y > tileMap.boundingBox.bottom) y = 0f
-        }
-    )
+    //list.add(
+    //    MofleSprite(
+    //        listRes[0].elt,
+    //        10.00.toFloat(),
+    //        0.00.toFloat(),
+    //        0
+    //    ){
+    //        y += 5
+    //        if (y > tileMap.boundingBox.bottom) y = 0f
+    //    }
+    //)
 
 
     val game = Game(background = tileMap,
