@@ -21,6 +21,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.mofland.ui.theme.MoflandTheme
 import com.example.mofland.utils.loadSpritesheet
+import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
@@ -67,14 +69,25 @@ val spritePositions = listOf(
     // Ajoutez d'autres positions si nécessaire
 )
 
+val wood = Resources(name = "wood",  res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
+val rock = Resources(name = "rock",  res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
+val wheat = Resources(name = "wheat",  res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
+val gold = Resources(name = "gold",  res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
+val listRes = listOf(wood, rock, wheat, gold)
+@Composable
+fun ClickButton(modifier: Modifier = Modifier, resource : Resources){
+    //System.out.println("${resource.name} : ${resource.nb}")
+    Column {
+
+        Text(text = "Clicks pour ${resource.name} : ${resource.nb}")
+
+    }
+}
+
 @Composable
 fun DraggableTextLowLevel() {
-    val wood = Resources(name = "wood",  res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
-    val rock = Resources(name = "rock",  res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
-    val wheat = Resources(name = "wheat",  res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
-    val gold = Resources(name = "gold",  res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
-    val listRes = listOf(wood, rock, wheat, gold)
     LocalContext.current.loadSpritesheet(R.drawable.map, 2, 2)
+    LocalContext.current.loadSpritesheet(R.drawable.profile, 1, 1)
     listRes.forEach{
         LocalContext.current.loadSpritesheet(it.res, 1, 1)
     }
@@ -110,7 +123,10 @@ fun DraggableTextLowLevel() {
             }
         )
         Row {
-
+            ClickButton(Modifier, wood)
+            ClickButton(Modifier, rock)
+            ClickButton(Modifier, wheat)
+            ClickButton(Modifier, gold)
         }
     }
 }
