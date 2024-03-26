@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -50,62 +51,65 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
         R.drawable.disableinterface
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(transparentBlack)
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Surface(
-            color = paramsBackground,
+    if(visible){
+        Box(
             modifier = Modifier
-                .fillMaxSize(0.6f) // Utiliser la moitié de l'espace disponible
-                .background(paramsBackground)
-                .border(width = 2.dp, color = paramsBorder),
-            content = {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Paramètres",
-                        color = Color.White,
-                        fontSize = 40.sp,
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
+                .fillMaxSize()
+                .background(transparentBlack)
+                .padding(16.dp)
+                .pointerInput(Unit){},
+            contentAlignment = Alignment.Center
+        ) {
+            Surface(
+                color = paramsBackground,
+                modifier = Modifier
+                    .fillMaxSize(0.6f) // Utiliser la moitié de l'espace disponible
+                    .background(paramsBackground)
+                    .border(width = 2.dp, color = paramsBorder),
+                content = {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Image(
-                            painter = painterResource(id = imageResourceId),
-                            contentDescription = "Image",
-                            modifier = Modifier
-                                .size(50.dp)
-                                .clickable {
-                                    interfaceEnabled = !interfaceEnabled
-                                },
-                            contentScale = ContentScale.Fit
+                        Text(
+                            text = "Paramètres",
+                            color = Color.White,
+                            fontSize = 40.sp,
                         )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text("Musique", color = Color.White, fontSize = 24.sp)
+                        Spacer(modifier = Modifier.height(32.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = imageResourceId),
+                                contentDescription = "Image",
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    .clickable {
+                                        interfaceEnabled = !interfaceEnabled
+                                    },
+                                contentScale = ContentScale.Fit
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text("Musique", color = Color.White, fontSize = 24.sp)
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable { activity?.finish() })
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable { activity?.finish() })
                 }
-            }
-        )
-        Image(
-            painter = painterResource(id = R.drawable.closeinterface),
-            contentDescription = "Image",
-            modifier = Modifier
-                .size(50.dp)
-                .align(Alignment.TopEnd)
-                .padding(end = 4.dp, top = 4.dp)
-                .clickable { onDismiss() }
-        )
+            )
+            Image(
+                painter = painterResource(id = R.drawable.closeinterface),
+                contentDescription = "Image",
+                modifier = Modifier
+                    .size(50.dp)
+                    .align(Alignment.TopEnd)
+                    .padding(end = 4.dp, top = 4.dp)
+                    .clickable { onDismiss() }
+            )
+        }
     }
 }

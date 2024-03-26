@@ -32,6 +32,9 @@ import com.example.mofland.R
 fun Home(modifier: Modifier = Modifier) {
     val espacement = 200
     val backgroundColor = Color(0xFFE3B13A)
+    var menu by remember {
+        mutableStateOf(false)
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -55,10 +58,21 @@ fun Home(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(espacement.dp))
                 CadreComposantDroit(modifier = Modifier, Txt = "Quitter")
             }
-            Param(modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.BottomEnd))
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.BottomEnd),
+                contentAlignment = Alignment.BottomEnd)
+            {
+                Text(
+                    text = "Paramètres",
+                    color = Color.White,
+                    fontSize = 32.sp,
+                    modifier = Modifier.clickable { menu = true }
+                )
+            }
         }
+        Params(visible = menu, onDismiss = {menu = false})
     }
 }
 
@@ -74,6 +88,7 @@ fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String){
             painter = cadre,
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
+                .clickable {  }
         )
         Box(
             contentAlignment = Alignment.Center,
@@ -127,23 +142,5 @@ fun MiddleText(modifier: Modifier = Modifier) {
         Text(text = "Bienvenue sur Mofland",
             color= MiddleTextColor,
             fontSize = 64.sp)
-    }
-}
-
-@Composable
-fun Param(modifier: Modifier = Modifier){
-    var menu by remember {
-        mutableStateOf(false)
-    }
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.BottomEnd)
-    {
-        Text(
-            text = "Paramètres",
-            color = Color.White,
-            fontSize = 32.sp,
-            modifier = Modifier.clickable { menu = true }
-        )
     }
 }
