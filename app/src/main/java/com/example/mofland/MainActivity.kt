@@ -5,29 +5,31 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mofland.ui.theme.MoflandTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,22 +59,25 @@ fun GreetingPreview() {
 }
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val rock = painterResource(R.drawable.pierre)
+    val RectangleBas = Color(0xFF715745)
+
+    val rock = painterResource(R.drawable.rockressource)
     val rocks = 2000
 
-    val wood = painterResource(R.drawable.bois)
+    val wood = painterResource(R.drawable.logressource)
     val woods = 2000
 
-    val wheat = painterResource(R.drawable.ble)
+    val wheat = painterResource(R.drawable.wheatressource)
     val wheats = 2000
 
-    val gold = painterResource(R.drawable.bourse)
+    val gold = painterResource(R.drawable.moneyressource)
     val golds = 2000
 
-    val pickaxe = painterResource(R.drawable.pioche)
-    val upgrade = painterResource(R.drawable.upgrade)
-    val backpack = painterResource(R.drawable.backpack)
-    val book = painterResource(R.drawable.book)
+    val island = painterResource(R.drawable.islandinterface)
+    val backpack = painterResource(R.drawable.backpackinterface)
+    val upgrade = painterResource(R.drawable.upgradeinterface)
+    val bestiary = painterResource(R.drawable.bestiaryinterface)
+    val gear = painterResource(R.drawable.gearinterface)
 
     val espacement = 16
 
@@ -85,32 +90,27 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         CadreComposantUp(modifier = Modifier, nbrRessource = wheats, imgRessource = wheat)
         Spacer(modifier = Modifier.width(espacement.dp))
         CadreComposantUp(modifier = Modifier, nbrRessource = golds, imgRessource = gold)
-        Spacer(modifier = Modifier.width(180.dp))
-        EngrenageIcon(modifier = Modifier)
 
     }
 
     Row (modifier = Modifier,
         verticalAlignment = Alignment.Bottom) {
-        CadreComposantDown(modifier = Modifier, imgRessource = pickaxe)
+        CadreComposantDown(modifier = Modifier, imgRessource = island, texte = "Île")
         Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = upgrade)
+        CadreComposantDown(modifier = Modifier, imgRessource = backpack, texte = "Inventaire")
         Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = backpack)
+        CadreComposantDown(modifier = Modifier, imgRessource = upgrade, texte = "Upgrade")
         Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = book)
-        Spacer(modifier = Modifier.width(espacement.dp))
+        CadreComposantDown(modifier = Modifier, imgRessource = bestiary, texte = "Bestiaire")
+        Spacer(modifier = Modifier.width(350.dp))
+        CadreComposantDown(modifier = Modifier, imgRessource = gear, texte = "Setting")
     }
 
-    Row (modifier = Modifier,
-        verticalAlignment = Alignment.CenterVertically) {
-        ComposantUpgrade(modifier = Modifier, imgRessourceItem = pickaxe,nbrRessource = rocks, imgRessource = rock)
-    }
 }
 
 @Composable
 fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessource: Painter){
-    val cadre = painterResource(R.drawable.cadre)
+    val cadre = painterResource(R.drawable.scrollinterfacepetit)
 
 
     Box(modifier = Modifier
@@ -132,7 +132,8 @@ fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessou
                 modifier = Modifier.size(50.dp, 50.dp)
             )
             Text(
-                text = nbrRessource.toString()
+                text = nbrRessource.toString(),
+                color = Color.White
             )
         }
 
@@ -140,12 +141,13 @@ fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessou
 }
 
 @Composable
-fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter){
-    val cadre = painterResource(R.drawable.cadre)
+fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter, texte: String){
+    val cadre = painterResource(R.drawable.yellowbutton)
+    val WriteColor = Color(0xFF715745)
 
     Box(modifier = Modifier
-        .width(100.dp)
-        .height(75.dp)) {
+        .width(80.dp)
+        .height(60.dp)) {
         Image(
             painter = cadre,
             contentDescription = null,
@@ -155,50 +157,18 @@ fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter){
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Image(
-                painter = imgRessource,
-                contentDescription = null,
-                modifier = Modifier.size(50.dp, 50.dp)
-            )
+                Image(
+                    painter = imgRessource,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(50.dp, 50.dp)
+                        .offset(x = 0.dp, y = -(20.dp))
+                )
+                Text(text = texte,
+                    color = WriteColor,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(top = 32.dp)
+                )
         }
-    }
-}
-
-@Composable
-fun EngrenageIcon(modifier: Modifier = Modifier){
-    Box(modifier = modifier) {
-        Image(
-            painter = painterResource(R.drawable.engrenage),
-            contentDescription = null,
-            modifier = Modifier.size(50.dp, 50.dp)
-        )
-    }
-}
-
-@Composable
-fun ComposantUpgrade(modifier: Modifier = Modifier, imgRessourceItem: Painter,nbrRessource: Int, imgRessource: Painter){
-
-    Box(modifier = modifier){
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Améliorer votre")
-            Image(
-                painter = imgRessourceItem,
-                contentDescription = null,
-                modifier = Modifier.size(50.dp, 50.dp)
-            )
-            Text(text = " en utilisant $nbrRessource")
-            Image(
-                painter = imgRessource,
-                contentDescription = null,
-                modifier = Modifier.size(50.dp, 50.dp)
-            )
-        }
-    }
-}
-
-@Composable
-fun Upgrade(modifier: Modifier = Modifier){
-    Column {
-
     }
 }
