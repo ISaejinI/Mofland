@@ -215,6 +215,7 @@ fun QuarterScreenRectangle() {
         contentAlignment = Alignment.Center
     ) {
         Surface(
+            color = paramsBackground,
             modifier = Modifier
                 .fillMaxSize(0.6f) // Utiliser la moitié de l'espace disponible
                 .background(paramsBackground)
@@ -249,10 +250,18 @@ fun QuarterScreenRectangle() {
                         Spacer(modifier = Modifier.width(16.dp))
                         Text("Musique", color = Color.White, fontSize = 24.sp)
                     }
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable { activity?.finish() })
                 }
             }
+        )
+        Image(
+            painter = painterResource(id = R.drawable.closeinterface),
+            contentDescription = "Image",
+            modifier = Modifier
+                .size(50.dp)
+                .align(Alignment.TopEnd)
+                .padding(end = 8.dp, top = 8.dp)
         )
     }
 }
