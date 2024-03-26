@@ -60,10 +60,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             MoflandTheme {
                 // A surface container using the 'background' color from the theme
-
-                    Home()
-
+                Game()
             }
+        }
+    }
+}
+
+enum class Screen {
+    HOME, GAME
+}
+
+@Composable
+fun Game() {
+    var currentScreen by remember { mutableStateOf(Screen.HOME) }
+
+    Surface {
+        when (currentScreen) {
+            Screen.HOME -> Home(onPlayClick = { currentScreen = Screen.GAME })
+            Screen.GAME -> Map()
         }
     }
 }
