@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,6 +35,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
+import fr.iutlens.mmi.demo.utils.Music
+import fr.iutlens.mmi.demo.utils.Music.muteMusic
+import fr.iutlens.mmi.demo.utils.Music.muteSound
 
 
 @Composable
@@ -42,14 +47,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
     val transparentBlack = Color(0x80000000)
     val activity = (LocalContext.current as? Activity)
 
-
-    var interfaceEnabled by remember { mutableStateOf(false) }
-
-    val imageResourceId = if (interfaceEnabled) {
-        R.drawable.enableinterface
-    } else {
-        R.drawable.disableinterface
-    }
+    val interactionSource = remember { MutableInteractionSource() }
 
     if(visible){
         Box(
@@ -84,20 +82,54 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                painter = painterResource(id = imageResourceId),
+                                painter = painterResource(id = if (!muteMusic) R.drawable.disableinterface
+                                else R.drawable.enableinterface),
                                 contentDescription = "Image",
                                 modifier = Modifier
                                     .size(50.dp)
-                                    .clickable {
-                                        interfaceEnabled = !interfaceEnabled
+                                    .clickable(interactionSource = interactionSource, indication = null) {
+                                        muteMusic = !muteMusic
                                     },
                                 contentScale = ContentScale.Fit
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text("Musique", color = Color.White, fontSize = 24.sp)
+                            Slider(
+                                value = Music.volumeMusicLevel,
+                                onValueChange = { Music.volumeMusicLevel = it },
+                                valueRange = 0f..1f,
+                                steps = 6,
+                                modifier = Modifier.width(200.dp)
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = if (!muteSound) R.drawable.disableinterface
+                                else R.drawable.enableinterface),
+                                contentDescription = "Image",
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    .clickable(interactionSource = interactionSource, indication = null) {
+                                        muteSound = !muteSound
+                                    },
+                                contentScale = ContentScale.Fit
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text("Sons", color = Color.White, fontSize = 24.sp)
+                            Slider(
+                                value = Music.volumeSoundLevel,
+                                onValueChange = { Music.volumeSoundLevel = it },
+                                valueRange = 0f..1f,
+                                steps = 6,
+                                modifier = Modifier.width(200.dp)
+                            )
                         }
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable { activity?.finish() })
+                        Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { activity?.finish() })
                     }
                 }
             )
@@ -108,7 +140,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                     .size(50.dp)
                     .align(Alignment.TopEnd)
                     .padding(end = 4.dp, top = 4.dp)
-                    .clickable { onDismiss() }
+                    .clickable(interactionSource = interactionSource, indication = null) { onDismiss() }
             )
         }
     }

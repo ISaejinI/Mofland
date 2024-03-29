@@ -1,4 +1,4 @@
-package com.example.mofland.utils
+package fr.iutlens.mmi.demo.utils
 
 import android.content.Context
 import android.media.AudioAttributes
@@ -22,7 +22,11 @@ object Music {
     /**
      * mute permet d'activer ou désactiver le son joué par l'application
      */
-    var mute by mutableStateOf(true)
+    var muteMusic by mutableStateOf(false)
+    var muteSound by mutableStateOf(false)
+    var volumeSoundLevel by mutableStateOf(0.5f)
+    var volumeMusicLevel by mutableStateOf(0.5f)
+    var previousMusicVolume by mutableStateOf(0.5f)
 
     /**
      * Sound pool gère les bruitages (jusqu'à 10 en simultané ici)
@@ -31,8 +35,8 @@ object Music {
         .setMaxStreams(10)
         .setAudioAttributes(
             AudioAttributes.Builder()
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .setUsage(AudioAttributes.USAGE_GAME).build()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_GAME).build()
         ).build()
 
     /**
@@ -63,13 +67,13 @@ object Music {
      * @param rate
      */
     fun playSound(id: Int,
-                  leftVolume: Float = 1f,
-                  rightVolume: Float = 1f,
+                  leftVolume: Float = volumeSoundLevel,
+                  rightVolume: Float = volumeSoundLevel,
                   priority: Int = 1,
                   loop: Int = 0,
                   rate: Float = 1f
-                  ){
-        if (mute) return
+    ){
+        if (muteSound) return
         soundMap[id]?.let { soundId -> soundPool.play(soundId,leftVolume,rightVolume,priority, loop, rate) }
     }
 
@@ -77,9 +81,10 @@ object Music {
     @Composable
     operator fun invoke(id: Int){
         val context = LocalContext.current
-        val musicPlayer by remember(id to mute) {
+        val musicPlayer by remember(id to muteMusic) {
             derivedStateOf {
                 MediaPlayer.create(context, id).apply {
+                    setVolume(volumeMusicLevel, volumeMusicLevel)
                     setAudioAttributes(
                         AudioAttributes.Builder()
                             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -89,7 +94,7 @@ object Music {
             }
         }
 
-        if (!mute) DisposableEffect(id) {
+        if (!muteMusic) DisposableEffect(id) {
             musicPlayer.apply {
                 isLooping = true
                 start()

@@ -3,6 +3,7 @@ package com.example.mofland.menu
 import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
 import com.example.mofland.Screen
+import fr.iutlens.mmi.demo.utils.Music
 
 @Composable
 fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
@@ -36,6 +38,8 @@ fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
     var menu by remember {
         mutableStateOf(false)
     }
+
+    val interactionSource = remember { MutableInteractionSource() }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -69,7 +73,7 @@ fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
                     text = "Paramètres",
                     color = Color.White,
                     fontSize = 32.sp,
-                    modifier = Modifier.clickable { menu = true }
+                    modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { menu = true }
                 )
             }
             Box(
@@ -82,7 +86,8 @@ fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
                     text = "Crédits",
                     color = Color.White,
                     fontSize = 32.sp,
-                    modifier = Modifier.clickable { onNavigate(Screen.Credits) }
+                    modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { onNavigate(Screen.Credits)
+                        Music.playSound(R.raw.play)}
                 )
             }
         }
@@ -95,6 +100,8 @@ fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String, onNavigate:
     val cadre = painterResource(R.drawable.scrollinterfacelarge)
     val activity = (LocalContext.current as? Activity)
 
+    val interactionSource = remember { MutableInteractionSource() }
+
     Box(modifier = Modifier
         .width(200.dp)
         .height(100.dp)) {
@@ -102,7 +109,8 @@ fun CadreComposantGauche(modifier: Modifier = Modifier, Txt: String, onNavigate:
             painter = cadre,
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
-                .clickable { onNavigate(Screen.Game) }
+                .clickable(interactionSource = interactionSource, indication = null) { onNavigate(Screen.Game)
+                Music.playSound(R.raw.play)}
         )
         Box(
             contentAlignment = Alignment.Center,
@@ -121,6 +129,8 @@ fun CadreComposantDroit(modifier: Modifier = Modifier, Txt: String){
     val cadre = painterResource(R.drawable.scrollinterfacelarge)
     val activity = (LocalContext.current as? Activity)
 
+    val interactionSource = remember { MutableInteractionSource() }
+
     Box(modifier = Modifier
         .width(200.dp)
         .height(100.dp)) {
@@ -129,7 +139,7 @@ fun CadreComposantDroit(modifier: Modifier = Modifier, Txt: String){
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .clickable { activity?.finish() }
+                .clickable(interactionSource = interactionSource, indication = null) { activity?.finish() }
         )
         Box(
             contentAlignment = Alignment.Center,
