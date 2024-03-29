@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,7 +45,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("")
+                    //Greeting()
+                    SplitRectangleScreen()
                 }
             }
         }
@@ -54,121 +56,91 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     MoflandTheme {
-        Greeting("Android")
+        //Greeting()
+        SplitRectangleScreen()
     }
 }
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val RectangleBas = Color(0xFF715745)
-
-    val rock = painterResource(R.drawable.rockressource)
-    val rocks = 2000
-
-    val wood = painterResource(R.drawable.logressource)
-    val woods = 2000
-
-    val wheat = painterResource(R.drawable.wheatressource)
-    val wheats = 2000
-
-    val gold = painterResource(R.drawable.moneyressource)
-    val golds = 2000
-
-    val island = painterResource(R.drawable.islandinterface)
-    val backpack = painterResource(R.drawable.backpackinterface)
-    val upgrade = painterResource(R.drawable.upgradeinterface)
-    val bestiary = painterResource(R.drawable.bestiaryinterface)
-    val gear = painterResource(R.drawable.gearinterface)
-
-    val espacement = 16
-
-    Row (modifier = Modifier,
-        verticalAlignment = Alignment.Top) {
-        CadreComposantUp(modifier = Modifier, nbrRessource = rocks, imgRessource = rock)
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantUp(modifier = Modifier, nbrRessource = woods, imgRessource = wood)
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantUp(modifier = Modifier, nbrRessource = wheats, imgRessource = wheat)
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantUp(modifier = Modifier, nbrRessource = golds, imgRessource = gold)
-
-    }
-
-    Row (modifier = Modifier,
-        verticalAlignment = Alignment.Bottom) {
-        CadreComposantDown(modifier = Modifier, imgRessource = island, texte = "Île")
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = backpack, texte = "Inventaire")
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = upgrade, texte = "Upgrade")
-        Spacer(modifier = Modifier.width(espacement.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = bestiary, texte = "Bestiaire")
-        Spacer(modifier = Modifier.width(350.dp))
-        CadreComposantDown(modifier = Modifier, imgRessource = gear, texte = "Setting")
-    }
-
+fun Greeting(modifier: Modifier = Modifier) {
+    Text(text = "Salut")
 }
 
 @Composable
-fun CadreComposantUp(modifier: Modifier = Modifier, nbrRessource: Int, imgRessource: Painter){
-    val cadre = painterResource(R.drawable.scrollinterfacepetit)
-
-
-    Box(modifier = Modifier
-        .width(125.dp)
-        .height(75.dp)) {
-        Image(
-            painter = cadre,
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize()
-        )
-        Row(modifier= Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
+fun SplitRectangleScreen() {
+    Surface(
+        color = Color.White,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Image en arrière-plan
             Image(
-                painter = imgRessource,
-                contentDescription = null,
-                modifier = Modifier.size(50.dp, 50.dp)
+                painter = painterResource(id = R.drawable.openbookinterface),
+                contentDescription = "Votre description",
+                modifier = Modifier.fillMaxSize(),
+                // Ajustez la taille de l'image ici
             )
-            Text(
-                text = nbrRessource.toString(),
-                color = Color.White
-            )
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Ajustez la largeur de la colonne
+                Column(
+                    modifier = Modifier.fillMaxWidth(), // Modifier pour remplir la largeur maximale
+                    horizontalAlignment = Alignment.CenterHorizontally // Centrer horizontalement
+                ) {
+                    SplitRectangle(
+                        modifier = Modifier.size(width = 500.dp, height = 300.dp), // Ajustez la taille du SplitRectangle
+                        leftContent = {
+                            // Contenu à gauche
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.Blue)
+                            ) {
+                                // Éléments à gauche
+                            }
+                        },
+                        rightContent = {
+                            // Contenu à droite
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.Green)
+                            ) {
+                                // Éléments à droite
+                            }
+                        }
+                    )
+                }
+            }
         }
-
     }
 }
 
 @Composable
-fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Painter, texte: String){
-    val cadre = painterResource(R.drawable.yellowbutton)
-    val WriteColor = Color(0xFF715745)
-
-    Box(modifier = Modifier
-        .width(80.dp)
-        .height(60.dp)) {
-        Image(
-            painter = cadre,
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize()
-        )
+fun SplitRectangle(
+    modifier: Modifier = Modifier,
+    leftContent: @Composable () -> Unit,
+    rightContent: @Composable () -> Unit
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
         ) {
-                Image(
-                    painter = imgRessource,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(50.dp, 50.dp)
-                        .offset(x = 0.dp, y = -(20.dp))
-                )
-                Text(text = texte,
-                    color = WriteColor,
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(top = 32.dp)
-                )
+            leftContent()
+        }
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+        ) {
+            rightContent()
         }
     }
 }
