@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,6 +52,11 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
 
     val interactionSource = remember { MutableInteractionSource() }
 
+    var componentHeight by remember { mutableStateOf(0.dp) }
+    var componentWidth by remember { mutableStateOf(0.dp) }
+
+    val density = LocalDensity.current
+
     if(visible){
         Box(
             modifier = Modifier
@@ -63,7 +71,15 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                 modifier = Modifier
                     .fillMaxSize(0.6f) // Utiliser la moitié de l'espace disponible
                     .background(paramsBackground)
-                    .border(width = 2.dp, color = paramsBorder),
+                    .border(width = 2.dp, color = paramsBorder)
+                    .onGloballyPositioned {
+                        componentHeight = with(density) {
+                            it.size.height.toDp()
+                        }
+                        componentWidth = with(density) {
+                            it.size.width.toDp()
+                        }
+                    },
                 content = {
                     Column(
                         modifier = Modifier.fillMaxSize(),
@@ -93,7 +109,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                                 contentScale = ContentScale.Fit
                             )
                             Spacer(modifier = Modifier.width(16.dp))
-                            Text("Musique", color = Color.White, fontSize = 24.sp)
+                            Text("Musique", color = Color.White, fontSize = 24.sp, modifier= Modifier.offset(x = 0.dp, y = (-5).dp))
                             Slider(
                                 value = Music.volumeMusicLevel,
                                 onValueChange = { Music.volumeMusicLevel = it },
@@ -119,7 +135,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                                 contentScale = ContentScale.Fit
                             )
                             Spacer(modifier = Modifier.width(16.dp))
-                            Text("Sons", color = Color.White, fontSize = 24.sp)
+                            Text("Sons", color = Color.White, fontSize = 24.sp, modifier= Modifier.offset(x = 0.dp, y = (-5).dp))
                             Slider(
                                 value = Music.volumeSoundLevel,
                                 onValueChange = { Music.volumeSoundLevel = it },
@@ -137,8 +153,8 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                 painter = painterResource(id = R.drawable.closeinterface),
                 contentDescription = "Image",
                 modifier = Modifier
-                    .size(50.dp)
-                    .align(Alignment.TopEnd)
+                    .size(60.dp)
+                    .offset(x = componentWidth/2, y = -componentHeight/2)
                     .padding(end = 4.dp, top = 4.dp)
                     .clickable(interactionSource = interactionSource, indication = null) { onDismiss() }
             )

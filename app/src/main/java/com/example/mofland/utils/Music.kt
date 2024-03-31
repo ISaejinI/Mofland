@@ -26,7 +26,6 @@ object Music {
     var muteSound by mutableStateOf(false)
     var volumeSoundLevel by mutableStateOf(0.5f)
     var volumeMusicLevel by mutableStateOf(0.5f)
-    var previousMusicVolume by mutableStateOf(0.5f)
 
     /**
      * Sound pool gère les bruitages (jusqu'à 10 en simultané ici)

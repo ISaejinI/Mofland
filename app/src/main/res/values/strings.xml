@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Mofland</string>
+    <string name="detail_text1">Bienvenue dans Mofland, un monde où la nature dévoile sa splendeur la plus profonde. Explorez des environnements spectaculaires et collectez les ressources nécessaires pour votre aventure.</string>
+    <string name="detail_text2">En capturant des créatures magiques, de nouvelles opportunités se présenteront à vous. Préparez-vous à une exploration captivante où chaque découverte vous rapproche un peu plus de la magie de Mofland.</string>
+    <string name="detail_text3">Plongez dans cette expérience immersive et laissez-vous enchanter par la beauté naturelle de Mofland alors que vous explorez ses merveilles et découvrez ses mystères.</string>
 </resources>

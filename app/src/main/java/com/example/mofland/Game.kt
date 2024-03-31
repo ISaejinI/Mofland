@@ -51,17 +51,16 @@ fun makeGame(listRes : List<Resources>): Game {
             )
         }
     }
-    //list.add(
-    //    MofleSprite(
-    //        listRes[0].elt,
-    //        10.00.toFloat(),
-    //        0.00.toFloat(),
-    //        0
-    //    ){
-    //        y += 5
-    //        if (y > tileMap.boundingBox.bottom) y = 0f
-    //    }
-    //)
+    list.add(
+        MofleSprite(
+            listRes[0].elt,
+            10.00.toFloat(),
+            0.00.toFloat(),
+            0
+        ){
+            gold.nb+=1
+        }
+    )
 
 
     val game = Game(background = tileMap,
@@ -103,7 +102,7 @@ fun makeGame(listRes : List<Resources>): Game {
 
     var current : Sprite? = null
 
-    game.animationDelayMs = 20
+    game.animationDelayMs = 1000
     game.update ={
         it.spriteList.update()
         it.invalidate()
