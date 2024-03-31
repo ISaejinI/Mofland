@@ -69,7 +69,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
             Surface(
                 color = paramsBackground,
                 modifier = Modifier
-                    .fillMaxSize(0.6f) // Utiliser la moitié de l'espace disponible
+                    .fillMaxWidth(0.6f) // Utiliser la moitié de l'espace disponible
                     .background(paramsBackground)
                     .border(width = 2.dp, color = paramsBorder)
                     .onGloballyPositioned {
@@ -82,7 +82,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                     },
                 content = {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
