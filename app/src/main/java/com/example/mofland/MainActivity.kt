@@ -25,15 +25,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.ui.theme.MoflandTheme
@@ -52,7 +59,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting()
                     SplitRectangleScreen()
-                    BlockLeft()
                 }
             }
         }
@@ -64,7 +70,6 @@ fun GreetingPreview() {
     MoflandTheme {
         //Greeting()
         SplitRectangleScreen()
-        BlockLeft()
     }
 }
 @Composable
@@ -72,14 +77,16 @@ fun Greeting(modifier: Modifier = Modifier) {
     Text(text = "Salut")
 }
 
+
 @Composable
-fun BlockLeft(modifier: Modifier = Modifier) {
+fun BlockLeft(modifier: Modifier = Modifier, width:Dp) {
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.CenterStart,
+        contentAlignment = Alignment.Center,
+        modifier = modifier.offset(x=width),
         content = {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
             ) {
                 Box(
                     modifier = Modifier
@@ -128,6 +135,8 @@ fun BlockLeft(modifier: Modifier = Modifier) {
 }
 @Composable
 fun SplitRectangleScreen() {
+    var componentWidth by remember { mutableStateOf(0.dp) }
+    val density = LocalDensity.current
     Surface(
         color = Color.White,
         modifier = Modifier.fillMaxSize()
@@ -137,7 +146,12 @@ fun SplitRectangleScreen() {
                 bitmap = ImageBitmap.imageResource(id = R.drawable.openbookinterface),
                 contentDescription = "Votre description",
                 filterQuality = FilterQuality.None,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize()
+                    .onGloballyPositioned {
+                        componentWidth = with(density) {
+                            it.size.width.toDp()-125.dp
+                        }
+                    }.background(Color.Black),
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -292,6 +306,7 @@ fun SplitRectangleScreen() {
                 }
             }
         }
+        BlockLeft(width = -componentWidth/2)
     }
 }
 
