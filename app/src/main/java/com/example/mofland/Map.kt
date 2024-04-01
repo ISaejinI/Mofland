@@ -49,10 +49,10 @@ val spritePositions = listOf(
     // Ajoutez d'autres positions si nécessaire
 )
 
-val wood = Resources(name = "wood",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
-val rock = Resources(name = "rock",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
-val wheat = Resources(name = "wheat",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
-val gold = Resources(name = "gold",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
+val wood = Resources(name = "bois", nameTool = "hache",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
+val rock = Resources(name = "pierre", nameTool = "pioche",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
+val wheat = Resources(name = "blé", nameTool = "houe",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
+val gold = Resources(name = "or", nameTool = "bourse",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
 val listRes = listOf(wood, rock, wheat, gold)
 
 @Composable
@@ -136,7 +136,11 @@ fun Map() {
         LocalContext.current.loadSpritesheet(it.elt, 1, 1)
     }
     val game by remember { mutableStateOf(makeGame(listRes))}
-    var menu by remember {
+    var menuParams by remember {
+        mutableStateOf(false)
+    }
+
+    var menuLivre by remember {
         mutableStateOf(false)
     }
 
@@ -188,17 +192,18 @@ fun Map() {
         )
         Row (modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Bottom) {
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){menu=true}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){}
             Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menu=true}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){}
             Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menu=true}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menuLivre=true}
             Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.bestiaryinterface, texte = "Bestiaire"){menu=true}
-            Spacer(modifier = Modifier.width(350.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.gearinterface, texte = "Setting"){menu=true}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.bestiaryinterface, texte = "Bestiaire"){}
+            Spacer(modifier = Modifier.weight(1f))
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.gearinterface, texte = "Setting"){menuParams=true}
         }
     }
-    Params(visible = menu, onDismiss = {menu = false})
+    Params(visible = menuParams, onDismiss = {menuParams = false})
+    SplitRectangleScreen(resources = listRes, visible = menuLivre, onDismiss = {menuLivre = false})
     TypewriterDemo()
 }

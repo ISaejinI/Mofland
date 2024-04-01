@@ -51,16 +51,16 @@ fun makeGame(listRes : List<Resources>): Game {
             )
         }
     }
-    list.add(
-        MofleSprite(
-            listRes[0].elt,
-            10.00.toFloat(),
-            0.00.toFloat(),
-            0
-        ){
-            gold.nb+=1
-        }
-    )
+    //list.add(
+    //    MofleSprite(
+    //        listRes[0].elt,
+    //        10.00.toFloat(),
+    //        0.00.toFloat(),
+    //        0
+    //    ){
+    //        gold.nb+=1
+    //    }
+    //)
 
 
     val game = Game(background = tileMap,

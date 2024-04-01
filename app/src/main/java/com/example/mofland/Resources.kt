@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 
 class Resources(val name : String = "No Name",
+                val nameTool : String = "No Name",
                 val elt : Int = R.drawable.ic_launcher_foreground,
                 val res : Int = R.drawable.ic_launcher_foreground,
                 val tool : Int = R.drawable.ic_launcher_background,
