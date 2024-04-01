@@ -71,9 +71,11 @@ class MainActivity : ComponentActivity() {
     }
 
     var previousMusic: Boolean = false
+    var previousSound: Boolean = false
     override fun onPause() {
         super.onPause()
         previousMusic = muteMusic
+        previousSound = muteSound
         muteMusic = true //couper le son quand on est pas sur l'écran
         muteSound = true
         println("OnPause : $previousMusic")
@@ -82,6 +84,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume(){
         super.onResume()
         muteMusic = previousMusic
+        muteSound = previousSound
         println("OnResume : $previousMusic muteMusic : $muteMusic")
     }
 }
