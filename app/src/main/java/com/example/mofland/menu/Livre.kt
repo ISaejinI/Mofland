@@ -120,7 +120,7 @@ fun SplitRectangleScreen(modifier: Modifier = Modifier, resources: List<Resource
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         SplitRectangle(
-                            modifier = Modifier.size(width = 500.dp, height = 350.dp),
+                            modifier = Modifier.size(width = 490.dp, height = 350.dp),
                             leftContent = {
                                 Column(
                                     modifier = Modifier.fillMaxSize(),
@@ -214,7 +214,7 @@ fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
             }
         }
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = resource.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
+        Text(text = resource.nameTool.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
             modifier = Modifier.weight(1f),
             color = Color(0xFF715745)
         )
@@ -342,7 +342,7 @@ fun RightPart(modifier: Modifier = Modifier, resource: Resources){
                             )
                             Text(
                                 text = if(it.id!=3) "${it.cost}" else "${ceil(resource.cost/2.0).toInt()}",
-                                color = if((it.id!=3 && resource.nb >= resource.cost)||(gold.nb >= ceil(resource.cost / 2.0).toInt())) Color(0xFF715745) else Color(0x80715745),
+                                color = if((it.id!=3 && resource.nb >= resource.cost)||(it.id==3 && gold.nb >= ceil(resource.cost / 2.0).toInt())) Color(0xFF715745) else Color(0x80715745),
                                 fontSize = 14.sp,
                                 modifier = Modifier.padding(start = 4.dp)
                             )

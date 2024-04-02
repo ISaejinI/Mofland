@@ -39,6 +39,7 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mofland.menu.Oops
 import com.example.mofland.menu.Params
 import com.example.mofland.utils.loadSpritesheet
 
@@ -48,12 +49,6 @@ val spritePositions = listOf(
     Offset(500f, 600f)
     // Ajoutez d'autres positions si nécessaire
 )
-
-val wood = Resources(name = "bois", nameTool = "hache",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id=0)
-val rock = Resources(name = "pierre", nameTool = "pioche",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.ic_launcher_background, _cost = 10, id=1)
-val wheat = Resources(name = "blé", nameTool = "houe",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.ic_launcher_foreground, _cost = 10, id = 2)
-val gold = Resources(name = "or", nameTool = "bourse",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.ic_launcher_background, _cost = 15, id = 3)
-val listRes = listOf(wood, rock, wheat, gold)
 
 @Composable
 fun CadreComposantUp(modifier: Modifier = Modifier, resource: Resources){
@@ -144,6 +139,10 @@ fun Map() {
         mutableStateOf(false)
     }
 
+    var menuOops by remember {
+        mutableStateOf(false)
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         var offsetX by remember { mutableStateOf(0f) }
         var offsetY by remember { mutableStateOf(0f) }
@@ -192,9 +191,9 @@ fun Map() {
         )
         Row (modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Bottom) {
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){menuOops=true}
             Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menuOops=true}
             Spacer(modifier = Modifier.width(espacement.dp))
             CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menuLivre=true}
             Spacer(modifier = Modifier.width(espacement.dp))
@@ -204,6 +203,7 @@ fun Map() {
         }
     }
     Params(visible = menuParams, onDismiss = {menuParams = false})
+    Oops(visible = menuOops) {menuOops = false}
     SplitRectangleScreen(resources = listRes, visible = menuLivre, onDismiss = {menuLivre = false})
     TypewriterDemo()
 }

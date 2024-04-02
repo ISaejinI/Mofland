@@ -25,6 +25,12 @@ class Resources(val name : String = "No Name",
     }
 }
 
+val wood = Resources(name = "bois", nameTool = "hache",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.axetool, _cost = 10, id=0)
+val rock = Resources(name = "pierre", nameTool = "pioche",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.pickaxetool, _cost = 10, id=1)
+val wheat = Resources(name = "blé", nameTool = "houe",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.sickletool, _cost = 10, id = 2)
+val gold = Resources(name = "or", nameTool = "bourse",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.pursetool, _cost = 15, id = 3)
+val listRes = listOf(wood, rock, wheat, gold)
+
 /*
     class Wood {
         var nb by mutableIntStateOf(0)
