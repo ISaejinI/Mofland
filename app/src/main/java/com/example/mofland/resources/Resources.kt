@@ -1,8 +1,9 @@
-package com.example.mofland
+package com.example.mofland.resources
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
+import com.example.mofland.R
 
 class Resources(val name : String = "No Name",
                 val nameTool : String = "No Name",

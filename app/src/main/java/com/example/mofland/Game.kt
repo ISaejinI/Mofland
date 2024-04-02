@@ -1,17 +1,6 @@
 package com.example.mofland
 
-import android.util.Log
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.core.util.toRange
 import com.example.mofland.game.Game
-import com.example.mofland.ui.theme.MoflandTheme
-import com.example.mofland.game.sprite.BasicSprite
-import com.example.mofland.game.sprite.MofleSprite
 import com.example.mofland.game.sprite.RessourceSprite
 import com.example.mofland.game.sprite.Sprite
 import com.example.mofland.game.sprite.get
@@ -19,8 +8,7 @@ import com.example.mofland.game.sprite.mutableSpriteListOf
 import com.example.mofland.game.sprite.tiledArea
 import com.example.mofland.game.sprite.toMutableTileMap
 import com.example.mofland.game.transform.FitTransform
-import com.example.mofland.utils.SpriteSheet
-import com.example.mofland.utils.loadSpritesheet
+import com.example.mofland.resources.Resources
 
 fun makeGame(listRes : List<Resources>): Game {
     val map = """

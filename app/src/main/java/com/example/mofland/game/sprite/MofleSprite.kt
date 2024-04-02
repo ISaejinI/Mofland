@@ -1,12 +1,8 @@
 package com.example.mofland.game.sprite
 
 import android.graphics.RectF
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.withTransform
-import com.example.mofland.Resources
 import com.example.mofland.utils.SpriteSheet
 
 open class MofleSprite(val spriteSheet: SpriteSheet,

@@ -1,4 +1,4 @@
-package com.example.mofland
+package com.example.mofland.resources
 
 import kotlin.math.ceil
 

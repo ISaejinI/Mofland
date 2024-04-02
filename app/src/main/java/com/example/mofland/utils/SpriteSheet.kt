@@ -54,6 +54,7 @@ class SpriteSheet(val bitmap: Bitmap, val sizeX: Int, val sizeY: Int) {
      */
     fun paint(drawScope: DrawScope, ndx: Int, x: Float, y: Float) {
         get(ndx)?.let{drawScope.drawImage(it.asImageBitmap(),  Offset(x,y))}
+        //get(ndx)?.let{drawScope.drawImage(it.asImageBitmap(),  IntOffset(x.toInt(), y.toInt()), filterQuality = FilterQuality.None, srcSize = IntSize(it.width, it.height))
     }
 
     companion object {

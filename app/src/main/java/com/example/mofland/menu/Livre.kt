@@ -1,9 +1,5 @@
 package com.example.mofland
 
-import android.os.Bundle
-import android.view.View
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,17 +31,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mofland.ui.theme.MoflandTheme
+import com.example.mofland.resources.Resources
+import com.example.mofland.resources.checkUpgrade
+import com.example.mofland.resources.gold
+import com.example.mofland.resources.listRes
+import com.example.mofland.resources.rock
+import com.example.mofland.resources.upgradeClick
+import com.example.mofland.resources.wheat
+import com.example.mofland.resources.wood
 import java.util.Locale
 import kotlin.math.ceil
 
@@ -132,7 +131,7 @@ fun SplitRectangleScreen(modifier: Modifier = Modifier, resources: List<Resource
                                         modifier = Modifier.padding(8.dp),
                                         color = Color(0xFF715745)
                                     )
-                                    listRes.forEach {ressource ->
+                                    listRes.forEach { ressource ->
                                         ImprovementItem(
                                             modifier = Modifier
                                                 .padding(end = 40.dp)
