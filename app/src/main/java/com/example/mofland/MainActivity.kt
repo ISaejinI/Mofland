@@ -73,7 +73,7 @@ fun Greeting(modifier: Modifier = Modifier) {
 @Composable
 fun SplitRectangleScreen() {
     val taille = 80
-    val espacement = 40
+    val espacement = 20
 
     Surface(
         color = Color.White,
@@ -120,11 +120,21 @@ fun SplitRectangleScreen() {
                                         Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.axetool),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -146,11 +156,21 @@ fun SplitRectangleScreen() {
                                             }
                                             Spacer(modifier = Modifier.width(espacement.dp))
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.pickaxetool),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -173,11 +193,21 @@ fun SplitRectangleScreen() {
                                         }
                                         Row {
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.sickletool),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -199,11 +229,21 @@ fun SplitRectangleScreen() {
                                             }
                                             Spacer(modifier = Modifier.width(espacement.dp))
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.pursetool),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -251,11 +291,21 @@ fun SplitRectangleScreen() {
                                         Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.woodmofle),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -277,11 +327,21 @@ fun SplitRectangleScreen() {
                                             }
                                             Spacer(modifier = Modifier.width(espacement.dp))
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.rockmofle),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -304,11 +364,21 @@ fun SplitRectangleScreen() {
                                         }
                                         Row {
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.wheatmofle),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
@@ -330,11 +400,21 @@ fun SplitRectangleScreen() {
                                             }
                                             Spacer(modifier = Modifier.width(espacement.dp))
                                             Column {
-                                                Image(
-                                                    painter = painterResource(id = R.drawable.rockmofle),
-                                                    contentDescription = "Image",
-                                                    modifier = Modifier.size(taille.dp)
-                                                )
+                                                Box(
+                                                    modifier = Modifier.size(taille.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.yellowbutton),
+                                                        contentDescription = "Image à gauche",
+                                                        modifier = Modifier.size(80.dp)
+                                                    )
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.moneymofle),
+                                                        contentDescription = "Image à l'intérieur de YellowButton",
+                                                        modifier = Modifier.size(60.dp)
+                                                    )
+                                                }
                                                 Box(
                                                     modifier = Modifier
                                                         .size(64.dp)
