@@ -24,8 +24,6 @@ object Music {
      */
     var muteMusic by mutableStateOf(false)
     var muteSound by mutableStateOf(false)
-    var volumeSoundLevel by mutableStateOf(0.5f)
-    var volumeMusicLevel by mutableStateOf(0.5f)
 
     /**
      * Sound pool gère les bruitages (jusqu'à 10 en simultané ici)
@@ -66,8 +64,8 @@ object Music {
      * @param rate
      */
     fun playSound(id: Int,
-                  leftVolume: Float = volumeSoundLevel,
-                  rightVolume: Float = volumeSoundLevel,
+                  leftVolume: Float = 1f,
+                  rightVolume: Float = 1f,
                   priority: Int = 1,
                   loop: Int = 0,
                   rate: Float = 1f
@@ -83,7 +81,6 @@ object Music {
         val musicPlayer by remember(id to muteMusic) {
             derivedStateOf {
                 MediaPlayer.create(context, id).apply {
-                    setVolume(volumeMusicLevel, volumeMusicLevel)
                     setAudioAttributes(
                         AudioAttributes.Builder()
                             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)

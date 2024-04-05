@@ -110,13 +110,6 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text("Musique", color = Color.White, fontSize = 24.sp, modifier= Modifier.offset(x = 0.dp, y = (-5).dp))
-                            Slider(
-                                value = Music.volumeMusicLevel,
-                                onValueChange = { Music.volumeMusicLevel = it },
-                                valueRange = 0f..1f,
-                                steps = 6,
-                                modifier = Modifier.width(200.dp)
-                            )
                         }
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -136,13 +129,6 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text("Sons", color = Color.White, fontSize = 24.sp, modifier= Modifier.offset(x = 0.dp, y = (-5).dp))
-                            Slider(
-                                value = Music.volumeSoundLevel,
-                                onValueChange = { Music.volumeSoundLevel = it },
-                                valueRange = 0f..1f,
-                                steps = 6,
-                                modifier = Modifier.width(200.dp)
-                            )
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text("Quitter", color = Color.White, fontSize = 30.sp, modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { activity?.finish() })

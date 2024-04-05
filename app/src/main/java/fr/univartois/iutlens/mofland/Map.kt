@@ -190,10 +190,10 @@ fun Map() {
         )
         Row (modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Bottom) {
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){menuOops=true}
-            Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menuOops=true}
-            Spacer(modifier = Modifier.width(espacement.dp))
+            //CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.islandinterface, texte = "Île"){menuOops=true}
+            //Spacer(modifier = Modifier.width(espacement.dp))
+            //CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menuOops=true}
+            //Spacer(modifier = Modifier.width(espacement.dp))
             CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menuLivre=true}
             Spacer(modifier = Modifier.width(espacement.dp))
             CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.bestiaryinterface, texte = "Bestiaire"){}
@@ -202,7 +202,6 @@ fun Map() {
         }
     }
     Params(visible = menuParams, onDismiss = {menuParams = false})
-    Oops(visible = menuOops) {menuOops = false}
     SplitRectangleScreen(resources = listRes, visible = menuLivre, onDismiss = {menuLivre = false})
     TypewriterDemo()
 }

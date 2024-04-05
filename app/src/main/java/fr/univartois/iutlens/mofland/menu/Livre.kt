@@ -61,23 +61,18 @@ fun BlockLeft(modifier: Modifier = Modifier, width:Dp, onDismiss: () -> Unit) {
             ) {
                 Box(
                     modifier = Modifier
-                        .size(60.dp)
-                        .border(
-                            width = 2.dp,
-                            color = Color(0xFFFFCA38),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .background(
-                            color = Color(0xFF715745),
-                            shape = RoundedCornerShape(8.dp)
-                        )
                         .clickable{onDismiss()},
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
+                        painter = painterResource(id = R.drawable.bookmarkinterface),
+                        contentDescription = "Paw Button",
+                        modifier = Modifier.size(70.dp)
+                    )
+                    Image(
                         painter = painterResource(id = R.drawable.pawbutton),
                         contentDescription = "Paw Button",
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(40.dp).offset(x=6.dp)
                     )
                 }
             }
