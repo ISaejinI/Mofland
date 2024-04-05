@@ -110,37 +110,119 @@ fun SplitRectangleScreen() {
                                     modifier = Modifier
                                         .width(150.dp)
                                         .height(2.dp) // Hauteur de la barre
-                                        .background(Color(0xFFE76D5A), shape = RoundedCornerShape(10))
+                                        .background(
+                                            Color(0xFFE76D5A),
+                                            shape = RoundedCornerShape(10)
+                                        )
                                 )
                                 Box(modifier = Modifier.padding(end = 50.dp)){
                                     Column {
                                         Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
-                                            Image(
-                                                painter = painterResource(id = R.drawable.axetool),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                             Spacer(modifier = Modifier.width(espacement.dp))
-                                            Image(
-                                                painter = painterResource(id = R.drawable.pickaxetool),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                         }
-                                        Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
-                                            Image(
-                                                painter = painterResource(id = R.drawable.sickletool),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                             Spacer(modifier = Modifier.width(espacement.dp))
-                                            Image(
-                                                painter = painterResource(id = R.drawable.pursetool),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -159,37 +241,119 @@ fun SplitRectangleScreen() {
                                     modifier = Modifier
                                         .width(150.dp)
                                         .height(2.dp) // Hauteur de la barre
-                                        .background(Color(0xFFE76D5A), shape = RoundedCornerShape(10))
+                                        .background(
+                                            Color(0xFFE76D5A),
+                                            shape = RoundedCornerShape(10)
+                                        )
                                 )
                                 Box(modifier = Modifier.padding(start = 50.dp)){
                                     Column {
                                         Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
-                                            Image(
-                                                painter = painterResource(id = R.drawable.rockmofle),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                             Spacer(modifier = Modifier.width(espacement.dp))
-                                            Image(
-                                                painter = painterResource(id = R.drawable.moneymofle),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                         }
-                                        Spacer(modifier = Modifier.height(espacement.dp))
                                         Row {
-                                            Image(
-                                                painter = painterResource(id = R.drawable.wheatmofle),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                             Spacer(modifier = Modifier.width(espacement.dp))
-                                            Image(
-                                                painter = painterResource(id = R.drawable.woodmofle),
-                                                contentDescription = "Image",
-                                                modifier = Modifier.size(taille.dp)
-                                            )
+                                            Column {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.rockmofle),
+                                                    contentDescription = "Image",
+                                                    modifier = Modifier.size(taille.dp)
+                                                )
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(64.dp)
+                                                        .padding(start = 20.dp),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Image(
+                                                        painter = painterResource(id = R.drawable.tag),
+                                                        contentDescription = "Image en dessous",
+                                                        modifier = Modifier.size(48.dp)
+                                                    )
+                                                    Text(
+                                                        text = "Nv 10",
+                                                        color = Color(0xFF715745),
+                                                        fontSize = 14.sp,
+                                                        modifier = Modifier.padding(start = 4.dp)
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
