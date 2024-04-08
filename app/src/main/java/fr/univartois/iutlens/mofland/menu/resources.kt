@@ -52,7 +52,7 @@ import java.util.Locale
 import kotlin.math.ceil
 
 @Composable
-fun BlockLeft(modifier: Modifier = Modifier, width:Dp, onDismiss: () -> Unit) {
+fun BlockLeft(modifier: Modifier = Modifier, width:Dp, img: Int, onClick: () -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier.offset(x=width),
@@ -63,7 +63,7 @@ fun BlockLeft(modifier: Modifier = Modifier, width:Dp, onDismiss: () -> Unit) {
             ) {
                 Box(
                     modifier = Modifier
-                        .clickable{onDismiss()},
+                        .clickable{onClick()},
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
@@ -177,7 +177,7 @@ fun SplitRectangleScreenR(modifier: Modifier = Modifier, resources: List<Resourc
                     }
                 }
             }
-            BlockLeft(width = -componentWidth / 2){}
+           // BlockLeft(width = -componentWidth / 2){}
         }
     }
 }

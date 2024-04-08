@@ -12,8 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.pointerInput
+import fr.univartois.iutlens.mofland.game.sprite.BulleSprite
 import fr.univartois.iutlens.mofland.game.sprite.Sprite
 import fr.univartois.iutlens.mofland.game.sprite.SpriteList
+import fr.univartois.iutlens.mofland.game.sprite.mutableSpriteListOf
 import fr.univartois.iutlens.mofland.game.transform.CameraTransform
 import kotlinx.coroutines.delay
 import kotlin.time.TimeSource
@@ -36,8 +38,9 @@ class Game(val background : Sprite,
            val transform: CameraTransform,
            var onDragStart: ((Offset) -> Unit)? = null,
            var onDragMove:  ((Offset) -> Unit)? = null,
-           var onTap: ((Offset)-> Unit)? = null
+           var onTap: (Game.(Offset)-> Unit)? = null
         ) {
+    val particuleList = mutableSpriteListOf()
     val timeSource = TimeSource.Monotonic
 
     /**
@@ -67,6 +70,10 @@ class Game(val background : Sprite,
         elapsed = (timeSource.markNow() - start).inWholeMilliseconds
     }
 
+
+    fun createBulle( x: Float, y : Float, text : String, sprite: Int,ndx: Int, duration : Int = 100){
+        particuleList += BulleSprite(sprite,x,y,ndx,duration,text)
+    }
     /**
      * View
      * Composant affichant le jeu décrit dans cette classe
@@ -81,7 +88,7 @@ class Game(val background : Sprite,
         // gestion des évènements
         Canvas(modifier = modifier.pointerInput(key1 = this) {
             if (onTap!= null) detectTapGestures {
-                onTap?.invoke(transform.getPoint(it))
+                onTap?.invoke(this@Game,transform.getPoint(it))
                 invalidate()
             }
             if (onDragMove!= null) detectDragGestures(onDragStart = {
@@ -94,6 +101,7 @@ class Game(val background : Sprite,
             this.withTransform({ transform(transform.getMatrix(size)) }) {
                 background.paint(this, elapsed)
                 spriteList.paint(this, elapsed)
+                particuleList.paint(this,elapsed)
             }
         }
         // Gestion du rafraîssement automatique si update et animationDelay sont défnis
@@ -104,6 +112,8 @@ class Game(val background : Sprite,
                     val current = (timeSource.markNow()-start).inWholeMilliseconds
                     val next = elapsed+ delay
                     if (next>current) delay(next-current)
+                    particuleList.update()
+                    particuleList.removeIf { it is BulleSprite && it.duration<0 }
                     myUpdate(this@Game)
                 }
             }

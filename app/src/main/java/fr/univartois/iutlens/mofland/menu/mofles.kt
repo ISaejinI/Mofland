@@ -141,7 +141,7 @@ fun SplitRectangleScreenM(modifier: Modifier = Modifier, resources: List<Resourc
                     }
                 }
             }
-            BlockLeft(width = -componentWidth / 2){}
+            //BlockLeft(width = -componentWidth / 2){}
         }
     }
 }

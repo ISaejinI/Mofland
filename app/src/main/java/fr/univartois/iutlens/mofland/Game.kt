@@ -2,6 +2,8 @@ package fr.univartois.iutlens.mofland
 
 import com.example.mofland.R
 import fr.univartois.iutlens.mofland.game.Game
+import fr.univartois.iutlens.mofland.game.sprite.BulleSprite
+import fr.univartois.iutlens.mofland.game.sprite.MofleSprite
 import fr.univartois.iutlens.mofland.game.sprite.RessourceSprite
 import fr.univartois.iutlens.mofland.game.sprite.Sprite
 import fr.univartois.iutlens.mofland.game.sprite.get
@@ -59,6 +61,7 @@ fun makeGame(listRes : List<Resources>): Game {
         val target  =  list[x,y]
         if (target != null && target is RessourceSprite) {
             target.ressource.click()
+            this.createBulle(target.x +50, target.y, "+${target.ressource.mlt}", R.drawable.forestelement, 0, 10)
             if(target.nbClick>0){
                 target.nbClick-=1
             }else {
@@ -91,7 +94,7 @@ fun makeGame(listRes : List<Resources>): Game {
 
     var current : Sprite? = null
 
-    game.animationDelayMs = 1000
+    game.animationDelayMs = 40
     game.update ={
         it.spriteList.update()
         it.invalidate()
