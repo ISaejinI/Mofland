@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.mofland.R
+import fr.iutlens.mmi.demo.utils.Music
 import kotlinx.coroutines.delay
 
 @Composable
@@ -27,6 +28,10 @@ fun TypewriterText(
 ) {
     var visibleText by remember { mutableStateOf("") }
     var isTextFullyDisplayed by remember { mutableStateOf(false) }
+
+    if(isTextFullyDisplayed==false){
+        Music(id = R.raw.blabla)
+    }else{Music.stopMusic(id = R.raw.blabla)}
 
     LaunchedEffect(text) {
         for (i in text.indices) {
@@ -53,6 +58,7 @@ fun TypewriterText(
                     onClick()
                     isTextFullyDisplayed = false
                 }
+                Music.playSound(R.raw.bouttons)
             }
             .padding(16.dp)
     ){

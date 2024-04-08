@@ -105,6 +105,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                                     .size(50.dp)
                                     .clickable(interactionSource = interactionSource, indication = null) {
                                         muteMusic = !muteMusic
+                                        Music.playSound(R.raw.selection)
                                     },
                                 contentScale = ContentScale.Fit
                             )
@@ -124,6 +125,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                                     .size(50.dp)
                                     .clickable(interactionSource = interactionSource, indication = null) {
                                         muteSound = !muteSound
+                                        Music.playSound(R.raw.selection)
                                     },
                                 contentScale = ContentScale.Fit
                             )
@@ -142,7 +144,7 @@ fun Params(modifier: Modifier = Modifier, visible : Boolean, onDismiss: () -> Un
                     .size(60.dp)
                     .offset(x = componentWidth/2, y = -componentHeight/2)
                     .padding(end = 4.dp, top = 4.dp)
-                    .clickable(interactionSource = interactionSource, indication = null) { onDismiss() }
+                    .clickable(interactionSource = interactionSource, indication = null) { onDismiss();Music.playSound(R.raw.fermer) }
             )
         }
     }

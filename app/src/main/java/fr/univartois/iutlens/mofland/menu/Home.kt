@@ -78,7 +78,7 @@ fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
                     text = "Paramètres",
                     color = Color.White,
                     fontSize = 32.sp,
-                    modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { menu = true }
+                    modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { menu = true ; Music.playSound(R.raw.bouttons)}
                 )
             }
             Box(
@@ -93,7 +93,7 @@ fun Home(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit) {
                     fontSize = 32.sp,
                     modifier = Modifier.clickable(interactionSource = interactionSource, indication = null) { onNavigate(
                         Screen.Credits)
-                        Music.playSound(R.raw.play)}
+                        Music.playSound(R.raw.bouttons)}
                 )
             }
         }

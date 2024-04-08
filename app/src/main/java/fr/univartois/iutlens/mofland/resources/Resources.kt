@@ -10,6 +10,7 @@ class Resources(val name : String = "No Name",
                 val elt : Int = R.drawable.ic_launcher_foreground,
                 val res : Int = R.drawable.ic_launcher_foreground,
                 val tool : Int = R.drawable.ic_launcher_background,
+                val sound : Int,
                 _cost : Int = 0,
                 val id : Int
 ) {
@@ -26,10 +27,10 @@ class Resources(val name : String = "No Name",
     }
 }
 
-val wood = Resources(name = "bois", nameTool = "hache",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.axetool, _cost = 10, id=0)
-val rock = Resources(name = "pierre", nameTool = "pioche",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.pickaxetool, _cost = 10, id=1)
-val wheat = Resources(name = "blé", nameTool = "houe",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.sickletool, _cost = 10, id = 2)
-val gold = Resources(name = "or", nameTool = "bourse",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.pursetool, _cost = 15, id = 3)
+val wood = Resources(name = "bois", nameTool = "hache",  elt = R.drawable.forestelement, res = R.drawable.logressource, tool =  R.drawable.axetool, sound = R.raw.bois, _cost = 10, id=0)
+val rock = Resources(name = "pierre", nameTool = "pioche",  elt = R.drawable.mineelement, res = R.drawable.rockressource, tool =  R.drawable.pickaxetool, sound = R.raw.pierre, _cost = 10, id=1)
+val wheat = Resources(name = "blé", nameTool = "houe",  elt = R.drawable.farmelement, res = R.drawable.wheatressource, tool =  R.drawable.sickletool, sound = R.raw.ble, _cost = 10, id = 2)
+val gold = Resources(name = "or", nameTool = "bourse",  elt = R.drawable.townelement, res = R.drawable.moneyressource, tool =  R.drawable.pursetool, sound = R.raw.piece, _cost = 15, id = 3)
 val listRes = listOf(wood, rock, wheat, gold)
 
 /*

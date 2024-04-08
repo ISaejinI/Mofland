@@ -94,7 +94,7 @@ fun Credits(modifier: Modifier = Modifier, onNavigate: (Screen) -> Unit){
                     text = "Retour",
                     modifier = Modifier.clickable {
                         onNavigate(Screen.Home)
-                        Music.playSound(R.raw.play)
+                        Music.playSound(R.raw.bouttons)
                     },
                     color = Color.White,
                     fontSize = 32.sp,

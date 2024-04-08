@@ -74,6 +74,15 @@ object Music {
         soundMap[id]?.let { soundId -> soundPool.play(soundId,leftVolume,rightVolume,priority, loop, rate) }
     }
 
+    @Composable
+    fun stopMusic(id: Int) {
+        // Vérifie si la musique spécifiée par l'identifiant est actuellement jouée
+        val mediaPlayer = MediaPlayer.create(LocalContext.current, id)
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+        }
+    }
+
 
     @Composable
     operator fun invoke(id: Int){

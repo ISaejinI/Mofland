@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
 import com.example.mofland.SplitRectangleScreenR
+import fr.iutlens.mmi.demo.utils.Music
 import fr.univartois.iutlens.mofland.menu.Params
 import fr.univartois.iutlens.mofland.mofles.listMof
 import fr.univartois.iutlens.mofland.resources.Resources
@@ -112,7 +113,7 @@ fun CadreComposantDown(modifier: Modifier = Modifier, imgRessource: Int, texte: 
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null
-                    ) { onClickAction() }
+                    ) { onClickAction();Music.playSound(R.raw.bouttons) }
             )
             Text(text = texte,
                 color = WriteColor,

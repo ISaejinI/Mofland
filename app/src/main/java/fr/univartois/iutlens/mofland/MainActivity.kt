@@ -26,6 +26,14 @@ class MainActivity : ComponentActivity() {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
         super.onCreate(savedInstanceState)
         loadSound(R.raw.play)
+        loadSound(R.raw.augmentation)
+        loadSound(R.raw.ble)
+        loadSound(R.raw.bois)
+        loadSound(R.raw.bouttons)
+        loadSound(R.raw.fermer)
+        loadSound(R.raw.piece)
+        loadSound(R.raw.pierre)
+        loadSound(R.raw.selection)
         setContent {
             MoflandTheme {
                 // A surface container using the 'background' color from the theme
@@ -61,6 +69,9 @@ fun Game() {
 
     if (currentScreen== Screen.Home || currentScreen== Screen.Credits){
         Music(id = R.raw.home)
+    }
+    if (currentScreen== Screen.Game){
+        Music(id = R.raw.musique1)
     }
 
     Surface {

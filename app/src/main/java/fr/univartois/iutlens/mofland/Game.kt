@@ -1,6 +1,7 @@
 package fr.univartois.iutlens.mofland
 
 import com.example.mofland.R
+import fr.iutlens.mmi.demo.utils.Music
 import fr.univartois.iutlens.mofland.game.Game
 import fr.univartois.iutlens.mofland.game.sprite.BulleSprite
 import fr.univartois.iutlens.mofland.game.sprite.MofleSprite
@@ -62,6 +63,7 @@ fun makeGame(listRes : List<Resources>): Game {
         if (target != null && target is RessourceSprite) {
             target.ressource.click()
             this.createBulle(target.x +50, target.y, "+${target.ressource.mlt}", R.drawable.forestelement, 0, 10)
+            Music.playSound(target.ressource.sound)
             if(target.nbClick>0){
                 target.nbClick-=1
             }else {
