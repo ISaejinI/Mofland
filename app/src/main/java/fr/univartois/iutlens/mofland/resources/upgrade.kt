@@ -4,7 +4,7 @@ import kotlin.math.ceil
 
 
 
-fun checkUpgrade(res: Resources): Boolean {
+fun checkUpgradeRes(res: Resources): Boolean {
     return when (res.id) {
         0, 1, 2 -> res.nb >= res.cost && gold.nb >= ceil(res.cost / 2.0).toInt()
         3 -> res.nb >= res.cost && wood.nb >= res.cost * 2 && rock.nb >= res.cost * 2 && wheat.nb >= res.cost * 2
@@ -13,7 +13,7 @@ fun checkUpgrade(res: Resources): Boolean {
 }
 
 
-fun upgradeClick(res : Resources){
+fun upgradeClickRes(res : Resources){
     when (res.id) {
         0, 1, 2 -> {
             res.nb -= res.cost

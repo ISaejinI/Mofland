@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
@@ -39,11 +41,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fr.univartois.iutlens.mofland.resources.Resources
-import fr.univartois.iutlens.mofland.resources.checkUpgrade
+import fr.univartois.iutlens.mofland.resources.checkUpgradeRes
 import fr.univartois.iutlens.mofland.resources.gold
 import fr.univartois.iutlens.mofland.resources.listRes
 import fr.univartois.iutlens.mofland.resources.rock
-import fr.univartois.iutlens.mofland.resources.upgradeClick
+import fr.univartois.iutlens.mofland.resources.upgradeClickRes
 import fr.univartois.iutlens.mofland.resources.wheat
 import fr.univartois.iutlens.mofland.resources.wood
 import java.util.Locale
@@ -80,7 +82,7 @@ fun BlockLeft(modifier: Modifier = Modifier, width:Dp, onDismiss: () -> Unit) {
     )
 }
 @Composable
-fun SplitRectangleScreen(modifier: Modifier = Modifier, resources: List<Resources>, visible : Boolean, onDismiss: () -> Unit) {
+fun SplitRectangleScreenR(modifier: Modifier = Modifier, resources: List<Resources>, visible : Boolean, onDismiss: () -> Unit) {
     if(visible) {
         var componentWidth by remember { mutableStateOf(0.dp) }
         val density = LocalDensity.current
@@ -91,19 +93,35 @@ fun SplitRectangleScreen(modifier: Modifier = Modifier, resources: List<Resource
             color = Color(0x80000000),
             modifier = Modifier.fillMaxSize()
         ) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp),
+                contentAlignment = Alignment.TopEnd// Alignement en haut à droite
+            ) {
                 Image(
-                    bitmap = ImageBitmap.imageResource(id = R.drawable.openbookinterface),
-                    contentDescription = "Votre description",
-                    filterQuality = FilterQuality.None,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .onGloballyPositioned {
-                            componentWidth = with(density) {
-                                it.size.width.toDp() - 125.dp
-                            }
-                        },
+                    painter = painterResource(id = R.drawable.closeinterface),
+                    contentDescription = "Close button",
+                    modifier = Modifier.size(50.dp).clickable{onDismiss()},
                 )
+            }
+
+            Box(modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.aspectRatio(3f/2f)){
+                    Image(
+                        bitmap = ImageBitmap.imageResource(id = R.drawable.openbookinterface),
+                        contentDescription = "Votre description",
+                        filterQuality = FilterQuality.None,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .onGloballyPositioned {
+                                componentWidth = with(density) {
+                                    it.size.width.toDp()
+                                }
+                            },
+                    )
+                }
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -124,32 +142,42 @@ fun SplitRectangleScreen(modifier: Modifier = Modifier, resources: List<Resource
                                     Text(
                                         text = "Améliorations",
                                         modifier = Modifier.padding(8.dp),
-                                        color = Color(0xFF715745)
+                                        color = Color(0xFF715745),
+                                        fontSize = 20.sp
+                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .width(150.dp)
+                                            .height(2.dp) // Hauteur de la barre
+                                            .background(
+                                                Color(0xFFE76D5A),
+                                                shape = RoundedCornerShape(10)
+                                            )
                                     )
                                     listRes.forEach { ressource ->
-                                        ImprovementItem(
+                                        Spacer(modifier = Modifier.height(12.dp))
+                                        ImprovementItemR(
                                             modifier = Modifier
                                                 .padding(end = 40.dp)
                                                 .background(
                                                     Color(0xFF52E7DE),
                                                     shape = RoundedCornerShape(8.dp)
                                                 )
-                                                .clickable{clickRes = ressource},
+                                                .clickable { clickRes = ressource },
                                             resource = ressource
 
                                         )
-                                        Spacer(modifier = Modifier.height(16.dp))
                                     }
                                 }
                             },
                             rightContent = {
-                                RightPart(resource = clickRes)
+                                RightPartR(resource = clickRes)
                             }
                         )
                     }
                 }
             }
-            BlockLeft(width = -componentWidth / 2){onDismiss()}
+            BlockLeft(width = -componentWidth / 2){}
         }
     }
 }
@@ -182,7 +210,7 @@ fun SplitRectangle(
 }
 
 @Composable
-fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
+fun ImprovementItemR(modifier: Modifier = Modifier, resource: Resources) {
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -192,7 +220,7 @@ fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
             contentAlignment = Alignment.Center
         ) {
             Box(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(50.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -209,12 +237,16 @@ fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
         }
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = resource.nameTool.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
-            modifier = Modifier.weight(1f),
-            color = Color(0xFF715745)
+            modifier = Modifier
+                .weight(1f)
+                .offset(y = -3.dp),
+            color = Color(0xFF715745),
+            fontSize = 20.sp
         )
         Spacer(modifier = Modifier.width(8.dp))
         Box(
-            modifier = Modifier.size(64.dp),
+            modifier = Modifier.size(64.dp)
+            ,
             contentAlignment = Alignment.Center
         ) {
             Box(
@@ -224,13 +256,15 @@ fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
                 Image(
                     painter = painterResource(id = R.drawable.tag),
                     contentDescription = "Image à droite",
-                    modifier = Modifier.size(36.dp)
+                    modifier = Modifier.size(54.dp)
                 )
                 Text(
                     text = "Nv ${resource.lvl}",
-                    modifier = Modifier.padding(4.dp),
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .offset(y = -3.dp),
                     color = Color(0xFF715745),
-                    fontSize = 10.sp
+                    fontSize = 15.sp
                 )
             }
         }
@@ -238,7 +272,7 @@ fun ImprovementItem(modifier: Modifier = Modifier, resource: Resources) {
 }
 
 @Composable
-fun RightPart(modifier: Modifier = Modifier, resource: Resources){
+fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -268,6 +302,12 @@ fun RightPart(modifier: Modifier = Modifier, resource: Resources){
                     text = resource.nameTool.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
                     color = Color(0xFF715745),
                     fontSize = 24.sp
+                )
+                Box(
+                    modifier = Modifier
+                        .width(150.dp)
+                        .height(2.dp) // Hauteur de la barre
+                        .background(Color(0xFFE76D5A), shape = RoundedCornerShape(10))
                 )
                 Box(
                     modifier = Modifier
@@ -371,7 +411,7 @@ fun RightPart(modifier: Modifier = Modifier, resource: Resources){
             modifier = Modifier
                 .size(256.dp)
                 .graphicsLayer {
-                    if (!checkUpgrade(resource)) {
+                    if (!checkUpgradeRes(resource)) {
                         alpha = 0.5f // Transparence de 50% pour la nuance de gris
                     }
                 },
@@ -380,7 +420,7 @@ fun RightPart(modifier: Modifier = Modifier, resource: Resources){
             Image(
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable(enabled = checkUpgrade(resource)){ upgradeClick(resource) },
+                    .clickable(enabled = checkUpgradeRes(resource)) { upgradeClickRes(resource) },
                 painter = painterResource(id = R.drawable.yellowlargebutton),
                 contentDescription = "Image tout en bas"
             )

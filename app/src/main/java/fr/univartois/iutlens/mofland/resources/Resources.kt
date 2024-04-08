@@ -13,7 +13,7 @@ class Resources(val name : String = "No Name",
                 _cost : Int = 0,
                 val id : Int
 ) {
-    var nb by mutableIntStateOf(0)
+    var nb by mutableIntStateOf(10040)
     var mlt by mutableIntStateOf(1) //Bonus (le +combien)
     var upMlt by mutableIntStateOf(1) //Améliorateur du bonus
     var cost by mutableIntStateOf(_cost)

@@ -35,9 +35,9 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
-import com.example.mofland.SplitRectangleScreen
-import fr.univartois.iutlens.mofland.menu.Oops
+import com.example.mofland.SplitRectangleScreenR
 import fr.univartois.iutlens.mofland.menu.Params
+import fr.univartois.iutlens.mofland.mofles.listMof
 import fr.univartois.iutlens.mofland.resources.Resources
 import fr.univartois.iutlens.mofland.resources.listRes
 import fr.univartois.iutlens.mofland.utils.loadSpritesheet
@@ -74,7 +74,7 @@ fun CadreComposantUp(modifier: Modifier = Modifier, resource: Resources){
                 modifier = Modifier.size(50.dp, 50.dp)
             )
             Text(
-                text = resource.nb.toString(),
+                text = formatNumber(resource.nb).toString(),
                 color = Color.White
             )
         }
@@ -134,11 +134,11 @@ fun Map() {
         mutableStateOf(false)
     }
 
-    var menuLivre by remember {
+    var menuLivreRes by remember {
         mutableStateOf(false)
     }
 
-    var menuOops by remember {
+    var menuLivreInv by remember {
         mutableStateOf(false)
     }
 
@@ -194,14 +194,24 @@ fun Map() {
             //Spacer(modifier = Modifier.width(espacement.dp))
             //CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menuOops=true}
             //Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menuLivre=true}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.upgradeinterface, texte = "Upgrade"){menuLivreRes=true}
             Spacer(modifier = Modifier.width(espacement.dp))
-            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.bestiaryinterface, texte = "Bestiaire"){}
+            CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.backpackinterface, texte = "Inventaire"){menuLivreInv=true}
             Spacer(modifier = Modifier.weight(1f))
             CadreComposantDown(modifier = Modifier, imgRessource = R.drawable.gearinterface, texte = "Setting"){menuParams=true}
         }
     }
     Params(visible = menuParams, onDismiss = {menuParams = false})
-    SplitRectangleScreen(resources = listRes, visible = menuLivre, onDismiss = {menuLivre = false})
+    SplitRectangleScreenR(resources = listRes, visible = menuLivreRes, onDismiss = {menuLivreRes = false})
+    SplitRectangleScreenI(resources = listRes, mofles = listMof, visible = menuLivreInv, onDismiss = {menuLivreInv = false})
     TypewriterDemo()
+}
+
+fun formatNumber(number: Int): String {
+    return when {
+        number >= 1_000_000_000 -> String.format("%.0fM", number / 1_000_000_000f)
+        number >= 1_000_000 -> String.format("%.1fm", number / 1_000_000f)
+        number >= 10_000 -> String.format("%.1fK", number / 1_000f)
+        else -> number.toString()
+    }
 }
