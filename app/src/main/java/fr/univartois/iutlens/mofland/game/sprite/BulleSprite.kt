@@ -25,7 +25,7 @@ class BulleSprite(sprite: Int, x: Float, y: Float, ndx: Int, var duration: Int, 
         }
     val textPaint = Paint().asFrameworkPaint().apply {
         isAntiAlias = true
-        textSize = 20f
+        textSize = 15f
         color = android.graphics.Color.WHITE
         typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD)
     }

@@ -26,6 +26,11 @@ fun upgradeClickRes(res : Resources){
             }
             gold.nb -= ceil(res.cost / 2.0).toInt()
             res.cost = ceil(res.cost * 1.75).toInt()
+            if ((res.lvl+1)%10 == 0){
+                res.nextMlt = res.mlt + res.lvl + 1
+            }else{
+                res.nextMlt = res.mlt+res.upMlt
+            }
         }
         3 -> {
             res.nb -= res.cost
@@ -40,6 +45,11 @@ fun upgradeClickRes(res : Resources){
             rock.nb -= res.cost * 2
             wheat.nb -= res.cost * 2
             res.cost = ceil(res.cost * 1.75).toInt()
+            if ((res.lvl+1)%10 == 0){
+                res.nextMlt = res.mlt + res.lvl + 1
+            }else{
+                res.nextMlt = res.mlt+res.upMlt
+            }
         }
         else -> Unit
     }

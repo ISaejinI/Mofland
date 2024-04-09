@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,6 +36,7 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mofland.R
+import com.example.mofland.SplitRectangleScreenM
 import com.example.mofland.SplitRectangleScreenR
 import fr.iutlens.mmi.demo.utils.Music
 import fr.univartois.iutlens.mofland.menu.Params
@@ -50,13 +52,15 @@ val spritePositions = listOf(
     // Ajoutez d'autres positions si nécessaire
 )
 
+var componentWidth = 0.dp
+
 @Composable
 fun CadreComposantUp(modifier: Modifier = Modifier, resource: Resources){
-    val cadre = R.drawable.scrollinterfacepetit
+    val cadre = R.drawable.scrollinterfacepetit2
 
     Box(modifier = Modifier
         .width(125.dp)
-        .height(75.dp)) {
+        .aspectRatio(2f/1f)) {
         Image(
             bitmap = ImageBitmap.imageResource(id = cadre),
             filterQuality = FilterQuality.None,
@@ -72,7 +76,7 @@ fun CadreComposantUp(modifier: Modifier = Modifier, resource: Resources){
                 bitmap = ImageBitmap.imageResource(id = resource.res),
                 filterQuality = FilterQuality.None,
                 contentDescription = null,
-                modifier = Modifier.size(50.dp, 50.dp)
+                modifier = Modifier.size(45.dp, 45.dp)
             )
             Text(
                 text = formatNumber(resource.nb).toString(),
@@ -136,6 +140,10 @@ fun Map() {
     }
 
     var menuLivreRes by remember {
+        mutableStateOf(false)
+    }
+
+    var menuLivreMof by remember {
         mutableStateOf(false)
     }
 
@@ -203,7 +211,8 @@ fun Map() {
         }
     }
     Params(visible = menuParams, onDismiss = {menuParams = false})
-    SplitRectangleScreenR(resources = listRes, visible = menuLivreRes, onDismiss = {menuLivreRes = false})
+    SplitRectangleScreenR(resources = listRes, visible = menuLivreRes, onDismiss = {menuLivreRes = false}, onClickOther = {menuLivreMof = true})
+    SplitRectangleScreenM(resources = listMof, visible = menuLivreMof, onDismiss = {menuLivreMof = false}, onClickOther = {menuLivreRes = true})
     SplitRectangleScreenI(resources = listRes, mofles = listMof, visible = menuLivreInv, onDismiss = {menuLivreInv = false})
     TypewriterDemo()
 }

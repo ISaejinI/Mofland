@@ -22,8 +22,8 @@ class Mofle(val name : String = "No Name",
 }
 
 
-val Mofle1 = Mofle(name = "woofle", elt = R.drawable.woodmofle, resource = wood, id = 0)
-val Mofle2 = Mofle(name = "rofle", elt = R.drawable.rockmofle, resource = rock, id = 1)
-val Mofle3 = Mofle(name = "wheafle", elt = R.drawable.wheatmofle, resource = wheat, id = 2)
-val Mofle4 = Mofle(name = "gofle", elt = R.drawable.moneymofle, resource = gold, id = 3)
+val Mofle1 = Mofle(name = "morgane", elt = R.drawable.woodmofle, resource = wood, id = 0)
+val Mofle2 = Mofle(name = "steve", elt = R.drawable.rockmofle, resource = rock, id = 1)
+val Mofle3 = Mofle(name = "marnie", elt = R.drawable.wheatmofle, resource = wheat, id = 2)
+val Mofle4 = Mofle(name = "teddy", elt = R.drawable.moneymofle, resource = gold, id = 3)
 val listMof = listOf(Mofle1, Mofle2, Mofle3, Mofle4)

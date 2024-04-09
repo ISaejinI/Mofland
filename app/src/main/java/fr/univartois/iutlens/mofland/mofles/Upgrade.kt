@@ -1,6 +1,15 @@
 package fr.univartois.iutlens.mofland.mofles
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import fr.univartois.iutlens.mofland.resources.Resources
 import fr.univartois.iutlens.mofland.resources.gold
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.math.ceil
 
 fun checkUpgradeMof(mof: Mofle): Boolean {
@@ -31,6 +40,7 @@ fun upgradeClickMof(mof : Mofle){
                 gold.nb -= ceil(mof.cost / 2.0).toInt()
                 mof.cost = ceil(mof.cost * 2.0).toInt()
             }
+            autoIncrement(mof)
         }
         3 -> {
             mof.resource.nb -= mof.cost
@@ -42,7 +52,26 @@ fun upgradeClickMof(mof : Mofle){
                 mof.mlt += mof.upMlt
             }
             mof.cost = ceil(mof.cost * 1.75).toInt()
+            autoIncrement(mof)
         }
         else -> Unit
+    }
+}
+
+fun autoIncrement(mof: Mofle): Job {
+    var statut = true
+    val lvl = mof.lvl
+    return CoroutineScope(Dispatchers.Default).launch {
+        while (statut) {
+            if (lvl == mof.lvl) {
+                mof.resource.nb += mof.mlt
+                delay(1000)
+            } else {
+                statut = false
+            }
+        }
+        if(!statut){
+            autoIncrement(mof)
+        }
     }
 }

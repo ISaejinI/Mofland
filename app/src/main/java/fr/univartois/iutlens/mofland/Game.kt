@@ -62,7 +62,7 @@ fun makeGame(listRes : List<Resources>): Game {
         val target  =  list[x,y]
         if (target != null && target is RessourceSprite) {
             target.ressource.click()
-            this.createBulle(target.x +50, target.y, "+${target.ressource.mlt}", R.drawable.forestelement, 0, 10)
+            this.createBulle(target.x +50, target.y, "+${target.ressource.mlt} ${target.ressource.name}", R.drawable.forestelement, 0, 10)
             Music.playSound(target.ressource.sound)
             if(target.nbClick>0){
                 target.nbClick-=1

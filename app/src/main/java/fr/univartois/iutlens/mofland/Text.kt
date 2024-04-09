@@ -58,7 +58,6 @@ fun TypewriterText(
                     onClick()
                     isTextFullyDisplayed = false
                 }
-                Music.playSound(R.raw.bouttons)
             }
             .padding(16.dp)
     ){

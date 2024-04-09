@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,6 +41,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fr.iutlens.mmi.demo.utils.Music
+import fr.univartois.iutlens.mofland.componentWidth
+import fr.univartois.iutlens.mofland.formatNumber
 import fr.univartois.iutlens.mofland.resources.Resources
 import fr.univartois.iutlens.mofland.resources.checkUpgradeRes
 import fr.univartois.iutlens.mofland.resources.gold
@@ -82,9 +87,8 @@ fun BlockLeft(modifier: Modifier = Modifier, img: Int, onClick: () -> Unit) {
     )
 }
 @Composable
-fun SplitRectangleScreenR(modifier: Modifier = Modifier, resources: List<Resources>, visible : Boolean, onDismiss: () -> Unit) {
+fun SplitRectangleScreenR(modifier: Modifier = Modifier, resources: List<Resources>, visible : Boolean, onDismiss: () -> Unit, onClickOther: () -> Unit) {
     if(visible) {
-        var componentWidth by remember { mutableStateOf(0.dp) }
         val density = LocalDensity.current
         var clickRes by remember {
             mutableStateOf(listRes[0])
@@ -182,7 +186,7 @@ fun SplitRectangleScreenR(modifier: Modifier = Modifier, resources: List<Resourc
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                 Column(modifier = Modifier.offset(x=-componentWidth/2)){
                     BlockLeft(img = R.drawable.toolbutton){}
-                    BlockLeft(img = R.drawable.pawbutton){}
+                    BlockLeft(img = R.drawable.pawbutton){onDismiss();onClickOther()}
                 }
             }
         }
@@ -318,7 +322,7 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
                 )
                 Box(
                     modifier = Modifier
-                        .size(64.dp)
+                        .width(64.dp)
                         .padding(start = 20.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -336,7 +340,7 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
                 }
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        //Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = "Skills",
             color = Color(0xFF715745),
@@ -347,18 +351,18 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
             color = Color(0xFF715745),
             fontSize = 14.sp
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = "Prochain Niveau",
             color = Color(0xFF715745),
             fontSize = 18.sp
         )
         Text(
-            text = "+ ${resource.upMlt} par clics",
+            text = "+ ${resource.nextMlt} par clics",
             color = Color(0xFF715745),
             fontSize = 14.sp
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = "Coût",
             color = Color(0xFF715745),
@@ -372,51 +376,81 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
             when (resource.id) {
                 0, 1, 2 -> {
                     val listCost = listOf(resource, gold)
-                    listCost.forEach {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                modifier = Modifier.size(20.dp),
-                                painter = painterResource(id = it.res),
-                                contentDescription = "Votre image"
-                            )
-                            Text(
-                                text = if(it.id!=3) "${it.cost}" else "${ceil(resource.cost/2.0).toInt()}",
-                                color = if((it.id!=3 && resource.nb >= resource.cost)||(it.id==3 && gold.nb >= ceil(resource.cost / 2.0).toInt())) Color(0xFF715745) else Color(0x80715745),
-                                fontSize = 14.sp,
-                                modifier = Modifier.padding(start = 4.dp)
-                            )
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = modifier.padding(8.dp),
+                        userScrollEnabled = false
+                    ) {
+                        items(listCost) { item ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Image(
+                                    modifier = Modifier.size(20.dp),
+                                    painter = painterResource(id = item.res),
+                                    contentDescription = "Votre image"
+                                )
+                                Text(
+                                    text = if (item.id != 3) formatNumber(item.cost).toString() else formatNumber(
+                                        ceil(resource.cost / 2.0).toInt()
+                                    ).toString(),
+                                    color = if ((item.id != 3 && resource.nb >= resource.cost) || (item.id == 3 && gold.nb >= ceil(
+                                            resource.cost / 2.0
+                                        ).toInt())
+                                    ) Color(0xFF715745) else Color(0x80715745),
+                                    fontSize = 14.sp,
+                                    modifier = Modifier.padding(start = 4.dp)
+                                )
+                            }
                         }
                     }
                 }
                 3 -> {
                     val listCost = listOf(wood, rock, wheat, resource)
-                    listCost.forEach {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                modifier = Modifier.size(20.dp),
-                                painter = painterResource(id = it.res),
-                                contentDescription = "Votre image"
-                            )
-                            Text(
-                                text = if(it.id==3) "${it.cost}" else "${gold.cost*2}",
-                                color =  if((it.id==3 && it.nb >= it.cost) || (it.id==0 && it.nb >= gold.cost * 2) || (it.id==1 && it.nb >= gold.cost * 2) || (it.id==2 && it.nb >= gold.cost * 2)) Color(0xFF715745) else Color(0x80715745),
-                                fontSize = 14.sp,
-                                modifier = Modifier.padding(start = 4.dp)
-                            )
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = modifier.padding(8.dp),
+                        userScrollEnabled = false,
+                    ) {
+                        items(listCost) { item ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Image(
+                                    modifier = Modifier.size(20.dp),
+                                    painter = painterResource(id = item.res),
+                                    contentDescription = "Votre image"
+                                )
+                                Text(
+                                    text = if (item.id == 3) formatNumber(item.cost).toString() else formatNumber(
+                                        gold.cost * 2
+                                    ).toString(),
+                                    color = if ((item.id == 3 && item.nb >= item.cost) || (item.id == 0 && item.nb >= gold.cost * 2) || (item.id == 1 && item.nb >= gold.cost * 2) || (item.id == 2 && item.nb >= gold.cost * 2)) Color(
+                                        0xFF715745
+                                    ) else Color(0x80715745),
+                                    fontSize = 14.sp,
+                                    modifier = Modifier.padding(start = 4.dp)
+                                )
+                            }
                         }
                     }
                 }
                 else -> Unit
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(
+            modifier = Modifier
+                .weight(1f)
+        )
         Box(
             modifier = Modifier
-                .size(256.dp)
+                .width(256.dp)
                 .graphicsLayer {
                     if (!checkUpgradeRes(resource)) {
                         alpha = 0.5f // Transparence de 50% pour la nuance de gris
@@ -426,7 +460,7 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
         ) {
             Image(
                 modifier = Modifier
-                    .size(100.dp)
+                    .width(100.dp).aspectRatio(2f/1f)
                     .clickable(enabled = checkUpgradeRes(resource)) { upgradeClickRes(resource);Music.playSound(R.raw.augmentation) },
                 painter = painterResource(id = R.drawable.yellowlargebutton),
                 contentDescription = "Image tout en bas"
@@ -438,5 +472,9 @@ fun RightPartR(modifier: Modifier = Modifier, resource: Resources){
                 modifier = Modifier.padding(4.dp)
             )
         }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
     }
 }
