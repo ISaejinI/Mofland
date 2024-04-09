@@ -68,7 +68,7 @@ fun Game() {
     var currentScreen by remember { mutableStateOf(Screen.Home) }
 
     if (currentScreen== Screen.Home || currentScreen== Screen.Credits){
-        Music(id = R.raw.home)
+        Music(id = R.raw.musique2)
     }
     if (currentScreen== Screen.Game){
         Music(id = R.raw.musique1)
